@@ -11,6 +11,7 @@ public class ModuloDeGestion {
 	public static ModuloDeGestion instance;
 
 	/**
+	 * Constructor de la clase.
 	 * @param cantidadDeMesas:
 	 *            Indica la cantidad de Mesas que poseerá el Bar.
 	 * 
@@ -44,6 +45,7 @@ public class ModuloDeGestion {
 	}
 
 	/**
+	 * Ocupa una Mesa.
 	 * @param numeroDeMesa:
 	 *            Número de la Mesa que se quiere ocupar.
 	 */
@@ -53,6 +55,7 @@ public class ModuloDeGestion {
 	}
 
 	/**
+	 * Cierra una Mesa.
 	 * @param numeroDeMesa:
 	 *            Número de la mesa que se quiere cerrar.
 	 */
@@ -62,6 +65,7 @@ public class ModuloDeGestion {
 	}
 
 	/**
+	 * Pasa una Mesa al estado disponible.
 	 * @param numeroDeMesa:
 	 *            Número de la mesa que se quiere pasar a diponible.
 	 */
@@ -71,6 +75,7 @@ public class ModuloDeGestion {
 	}
 
 	/**
+	 * Registra una consumicion en la Mesa.
 	 * @param numeroDeMesa:
 	 *            Número de la mesa en la que se va a registrar una consumición.
 	 * @param consumicion:
