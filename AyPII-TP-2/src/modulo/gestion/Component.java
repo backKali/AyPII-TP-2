@@ -7,7 +7,7 @@ public abstract class Component {
 	protected Double precioDeCompra;
 	protected Double precioDeVenta;
 	
-	protected static Integer contador;
+	protected static Integer contador = 0;
 
 	/**
 	 * @param codigoDeProducto:
