@@ -1,10 +1,12 @@
 package modulo.gestion;
 
+import excepciones.NumeroInvalido;
+
 public abstract class Component {
 
 	protected Integer codigoDeProducto;
 	protected String descripcion;
-	protected Double precioDeCompra;
+	protected Double precioDeCosto;
 	protected Double precioDeVenta;
 	
 	protected static Integer contador = 0;
@@ -14,16 +16,16 @@ public abstract class Component {
 	 *            el codigo que poseera.
 	 * @param descripcion:
 	 *            indica la descripcion.
-	 * @param precioDeCompra:
-	 *            indica el precio de compra, mayor a cero.
+	 * @param precioDeCosto:
+	 *            indica el precio de compra, debe ser mayor o igual a cero.
 	 * @param precioDeVenta:
-	 *            indica el precio de venta, mayor al precio de compra.
+	 *            indica el precio de venta, debe ser mayor al precio de costo.
 	 */
-	public Component(String descripcion, Double precioDeCompra, Double precioDeVenta) {
+	public Component(String descripcion, Double precioDeCosto, Double precioDeVenta) throws NumeroInvalido{
 
 		setCodigoDeProducto();
 		setDescripcion(descripcion);
-		setPrecioDeCompra(precioDeCompra);
+		setPrecioDeCosto(precioDeCosto);
 		setPrecioDeVenta(precioDeVenta);
 	}
 	
@@ -78,15 +80,20 @@ public abstract class Component {
 	 */
 	public Double getPrecioDeCompra() {
 
-		return precioDeCompra;
+		return precioDeCosto;
 	}
 
 	/*
 	 *  
 	 */
-	private void setPrecioDeCompra(Double precioDeCompra) {
+	private void setPrecioDeCosto(Double precioDeCosto) throws NumeroInvalido {
 
-		this.precioDeCompra = precioDeCompra;
+		if (precioDeCosto >= 0){
+			this.precioDeCosto = precioDeCosto;			
+		} else {
+			throw new NumeroInvalido("El precio de costo no puede ser negativo");
+		}
+		
 	}
 
 	/*
@@ -100,9 +107,14 @@ public abstract class Component {
 	/*
 	 * 
 	 */
-	private void setPrecioDeVenta(Double precioDeVenta) {
+	private void setPrecioDeVenta(Double precioDeVenta) throws NumeroInvalido {
 
-		this.precioDeVenta = precioDeVenta;
+		if (precioDeVenta > 0 && precioDeVenta > this.precioDeCosto){
+			this.precioDeVenta = precioDeVenta;
+		} else {
+			throw new NumeroInvalido("El precio de venta debe ser mayor a cero y al precio de costo");
+		}
+		
 	}
 
 }
