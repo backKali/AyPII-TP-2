@@ -2,12 +2,19 @@ package modulo.caja;
 
 import java.util.*;
 
+import modulo.gestion.Component;
+
 public class ModuloDeCaja {
 
 	private static ModuloDeCaja instance;
+	private Ticket ticket;
 	private Map<String, Ticket> listadoDeTickets;
 
-	public void generarTicket() {
+	public void generarTicket(Integer numeroDeMesa, Double montoTotal, LinkedList<Component> consumiciones) {
+		
+		this.ticket = new Ticket(numeroDeMesa, montoTotal, consumiciones);
+		
+		this.listadoDeTickets.put("", ticket);
 
 	}
 
@@ -16,7 +23,7 @@ public class ModuloDeCaja {
 		setListadoDeTickets(new TreeMap<String, Ticket>());
 	}
 
-	public ModuloDeCaja getInstance() {
+	public static ModuloDeCaja getInstance() {
 
 		if (instance == null) {
 
@@ -27,7 +34,9 @@ public class ModuloDeCaja {
 	}
 
 	public void listarPorFechas(String desde, String hasta) {
-
+		
+		
+		
 	}
 
 	public Map<String, Ticket> getListadoDeTickets() {

@@ -1,10 +1,12 @@
 package modulo.gestion;
 
+import excepciones.NumeroInvalido;
+
 public class Producto extends Component {
 
 	private Categorias categoria;
 	
-	public Producto(String descripcion, Double precioDeCompra, Double precioDeVenta, Categorias categoria) {
+	public Producto(String descripcion, Double precioDeCompra, Double precioDeVenta, Categorias categoria) throws NumeroInvalido {
 		
 		super(descripcion, precioDeCompra, precioDeVenta);
 		this.categoria = categoria;

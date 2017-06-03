@@ -2,26 +2,32 @@ package modulo.gestion;
 
 import java.util.*;
 
+import excepciones.NumeroInvalido;
+
 public class Combo extends Component {
 
 	private Set<Component> productosDelCombo;
 	private Integer descuento;
 	
-	public Combo(String descripcion, Integer descuento) {
+	public Combo(String descripcion, Integer descuento) throws NumeroInvalido{
 		
 		super(descripcion);
 		setDescuento(descuento);
 		this.productosDelCombo = new TreeSet<Component>();
-		setPrecioDeCompra();
+		setPrecioDeCosto();
 		setPrecioDeVenta();
 	}
 	
 	/**
 	 * @param descuento
 	 */
-	private void setDescuento(Integer descuento) {
+	private void setDescuento(Integer descuento) throws NumeroInvalido{
 
-		this.descuento = descuento;
+		if (descuento >=0 && descuento<100){
+			this.descuento = descuento;
+		} else {
+			throw new NumeroInvalido("El descuento debe ser mayor o igual a cero y menor a cien");
+		}
 	}
 	
 	/**
@@ -51,16 +57,16 @@ public class Combo extends Component {
 	/**
 	 * Le asigna el precio de compra al Combo.
 	 */
-	private void setPrecioDeCompra() {
+	private void setPrecioDeCosto() {
 		
-		Double precio = 0.0;	
+		Double precio = 0.0;
 		
 		Iterator<Component> itr = productosDelCombo.iterator();
 		while(itr.hasNext()) {
-			precio += itr.next().precioDeCompra;
+			precio += itr.next().precioDeCosto;
 		}
 		
-		this.precioDeCompra = precio;
+		this.precioDeCosto = precio;
 	}
 	
 	/**
@@ -68,7 +74,7 @@ public class Combo extends Component {
 	 */
 	private void setPrecioDeVenta() {
 
-		Double precio = 0.0;	
+		Double precio = 0.0;
 		
 		Iterator<Component> itr = productosDelCombo.iterator();
 		while(itr.hasNext()) {

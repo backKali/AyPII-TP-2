@@ -1,5 +1,6 @@
 package modulo.caja;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import modulo.gestion.Component;
 
@@ -15,14 +16,13 @@ public class Ticket {
 	
 	protected static Integer contador = 0;
 	
-	
-	public Ticket(String fechaYHora, Integer numeroDeMesa, Double montoTotal, TreeSet<Component> comsumicones) {
+	public Ticket(Integer numeroDeMesa, Double montoTotal, LinkedList<Component> comsumiciones) {
 		
 		setNumeroDeTicket();
-		setFechaYHora(fechaYHora);
+		setFechaYHora();
 		setNumeroDeMesa(numeroDeMesa);
 		setMontoTotal(montoTotal);
-		listaDeConsumiciones.addAll(comsumicones);
+		listaDeConsumiciones.addAll(comsumiciones);
 	}
 	
 	
@@ -36,8 +36,8 @@ public class Ticket {
 
 
 
-	private void setFechaYHora(String fechaYHora) {
-		this.fechaYHora = fechaYHora;
+	private void setFechaYHora() {
+		this.fechaYHora = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 	}
 
 
@@ -52,25 +52,17 @@ public class Ticket {
 		this.numeroDeMesa = numeroDeMesa;
 	}
 
-
-
 	public Double getMontoTotal() {
 		return montoTotal;
 	}
-
-
 
 	private void setMontoTotal(Double montoTotal) {
 		this.montoTotal = montoTotal;
 	}
 
-
-
 	public Integer getNumeroDeTicket() {
 		return numeroDeTicket;
 	}
-
-
 
 	private void setNumeroDeTicket() {
 
