@@ -6,9 +6,9 @@ public abstract class Component {
 
 	protected Integer codigoDeProducto;
 	protected String descripcion;
-	protected Double precioDeCosto;
+	protected Double precioDeCompra;
 	protected Double precioDeVenta;
-	
+
 	protected static Integer contador = 0;
 
 	/**
@@ -16,19 +16,20 @@ public abstract class Component {
 	 *            el codigo que poseera.
 	 * @param descripcion:
 	 *            indica la descripcion.
-	 * @param precioDeCosto:
-	 *            indica el precio de compra, debe ser mayor o igual a cero.
+	 * @param precioDeCompra:
+	 *            indica el precio de compra, mayor a cero.
 	 * @param precioDeVenta:
-	 *            indica el precio de venta, debe ser mayor al precio de costo.
+	 *            indica el precio de venta, mayor al precio de compra.
+	 * @throws NumeroInvalido 
 	 */
-	public Component(String descripcion, Double precioDeCosto, Double precioDeVenta) throws NumeroInvalido{
+	public Component(String descripcion, Double precioDeCompra, Double precioDeVenta) throws NumeroInvalido {
 
 		setCodigoDeProducto();
 		setDescripcion(descripcion);
-		setPrecioDeCosto(precioDeCosto);
+		setPrecioDeCompra(precioDeCompra);
 		setPrecioDeVenta(precioDeVenta);
 	}
-	
+
 	public Component(String descripcion) {
 
 		setCodigoDeProducto();
@@ -51,7 +52,7 @@ public abstract class Component {
 		return codigoDeProducto;
 	}
 
-	/*	
+	/*
 	 * Genera el codigo que lo identificara.
 	 */
 	private void setCodigoDeProducto() {
@@ -80,20 +81,21 @@ public abstract class Component {
 	 */
 	public Double getPrecioDeCompra() {
 
-		return precioDeCosto;
+		return precioDeCompra;
 	}
 
 	/*
 	 *  
 	 */
-	private void setPrecioDeCosto(Double precioDeCosto) throws NumeroInvalido {
+	private void setPrecioDeCompra(Double precioDeCompra) throws NumeroInvalido {
 
-		if (precioDeCosto >= 0){
-			this.precioDeCosto = precioDeCosto;			
+		if (precioDeCompra >= 0) {
+
+			this.precioDeCompra = precioDeCompra;
 		} else {
+
 			throw new NumeroInvalido("El precio de costo no puede ser negativo");
 		}
-		
 	}
 
 	/*
@@ -109,12 +111,13 @@ public abstract class Component {
 	 */
 	private void setPrecioDeVenta(Double precioDeVenta) throws NumeroInvalido {
 
-		if (precioDeVenta > 0 && precioDeVenta > this.precioDeCosto){
+		if (precioDeVenta > 0 && precioDeVenta > this.precioDeCompra){
+			
 			this.precioDeVenta = precioDeVenta;
 		} else {
+			
 			throw new NumeroInvalido("El precio de venta debe ser mayor a cero y al precio de costo");
 		}
-		
 	}
 
 }

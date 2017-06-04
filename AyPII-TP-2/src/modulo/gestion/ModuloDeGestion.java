@@ -2,6 +2,8 @@ package modulo.gestion;
 
 import java.util.*;
 
+import excepciones.EstadoInvalido;
+
 public class ModuloDeGestion {
 
 	/**
@@ -14,9 +16,10 @@ public class ModuloDeGestion {
 	 * Constructor de la clase.
 	 * @param cantidadDeMesas:
 	 *            Indica la cantidad de Mesas que poseerá el Bar.
+	 * @throws EstadoInvalido 
 	 * 
 	 */
-	private ModuloDeGestion(Integer cantidadDeMesas) {
+	private ModuloDeGestion(Integer cantidadDeMesas) throws EstadoInvalido {
 
 		this.mesas = new TreeSet<Mesa>();
 
@@ -33,8 +36,9 @@ public class ModuloDeGestion {
 	 * @param cantidadDeMesas:
 	 *            Indica la cantidad de Mesas que poseerá el Bar.
 	 * @return:
+	 * @throws EstadoInvalido 
 	 */
-	public static ModuloDeGestion getInstance(Integer cantidadDeMesas) {
+	public static ModuloDeGestion getInstance(Integer cantidadDeMesas) throws EstadoInvalido {
 
 		if (instance == null) {
 
@@ -58,8 +62,9 @@ public class ModuloDeGestion {
 	 * Cierra una Mesa.
 	 * @param numeroDeMesa:
 	 *            Número de la mesa que se quiere cerrar.
+	 * @throws EstadoInvalido 
 	 */
-	public void cerrarUnaMesa(Integer numeroDeMesa) {
+	public void cerrarUnaMesa(Integer numeroDeMesa) throws EstadoInvalido {
 
 		cerrarUnaMesa(obtenerMesa(numeroDeMesa));
 	}
@@ -76,12 +81,14 @@ public class ModuloDeGestion {
 
 	/**
 	 * Registra una consumicion en la Mesa.
+	 * 
 	 * @param numeroDeMesa:
 	 *            Número de la mesa en la que se va a registrar una consumición.
 	 * @param consumicion:
 	 *            Indica lo que se va a consumir en la Mesa.
+	 * @throws EstadoInvalido
 	 */
-	public void registrarConsumicion(Integer numeroDeMesa, Component consumicion) {
+	public void registrarConsumicion(Integer numeroDeMesa, Component consumicion) throws EstadoInvalido {
 
 		registrarConsumicion(obtenerMesa(numeroDeMesa), consumicion);
 	}
@@ -121,8 +128,9 @@ public class ModuloDeGestion {
 	/**
 	 * @param mesaACerrar:
 	 *            Mesa que se a cerrar.
+	 * @throws EstadoInvalido 
 	 */
-	private void cerrarUnaMesa(Mesa mesaACerrar) {
+	private void cerrarUnaMesa(Mesa mesaACerrar) throws EstadoInvalido {
 
 		mesaACerrar.cerrarMesa();
 	}
@@ -141,8 +149,9 @@ public class ModuloDeGestion {
 	 *            Mesa en la que se va a registrar una consumición.
 	 * @param consumucion:
 	 *            Indica la consumición a registrar.
+	 * @throws EstadoInvalido 
 	 */
-	private void registrarConsumicion(Mesa mesa, Component consumucion) {
+	private void registrarConsumicion(Mesa mesa, Component consumucion) throws EstadoInvalido {
 
 		mesa.registrarConsumicion(consumucion);
 	}

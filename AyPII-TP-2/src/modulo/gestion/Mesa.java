@@ -13,7 +13,7 @@ public class Mesa {
 
 	/**
 	 * @param numeroDeMesa:
-	 *            Indica el nÃºmero que poseerÃ¡ la Mesa.
+	 *            Indica el número que poseera la Mesa.
 	 */
 	public Mesa(Integer numeroDeMesa) throws EstadoInvalido {
 
@@ -23,7 +23,7 @@ public class Mesa {
 	}
 
 	/**
-	 * @return: Devuelve el nÃºmero de la Mesa.
+	 * @return: Devuelve el número de la Mesa.
 	 */
 	public Integer getNumero() {
 
@@ -43,12 +43,15 @@ public class Mesa {
 
 	/**
 	 * Cierra la Mesa.
+	 * @throws EstadoInvalido 
 	 */
-	public void cerrarMesa() throws EstadoInvalido{
+	public void cerrarMesa() throws EstadoInvalido {
 
 		if (getEstado() == EstadoMesa.DISPONIBLE){
-			this.estado = EstadoMesa.CERRADA;
+			
+			setEstado(EstadoMesa.CERRADA);
 		} else {
+			
 			throw new EstadoInvalido("Para Cerrar una mesa, debe estar en Disponible");
 		}
 	}
@@ -56,28 +59,30 @@ public class Mesa {
 	/**
 	 * Desocupa la Mesa.
 	 */
-	public void desocuparMesa() throws EstadoInvalido{
+	public void desocuparMesa() {
 
 		if (this.estado == EstadoMesa.OCUPADA && !this.consumiciones.isEmpty()){
+			
 			//Genera el ticket en caso que la mesa haya hecho una consumicion
 			ModuloDeCaja.getInstance().generarTicket(this.getNumero(), this.obtenerGastoDeLaMesa(), this.consumiciones);
 		}
-		this.estado = EstadoMesa.DISPONIBLE;
+		setEstado(EstadoMesa.DISPONIBLE);
 	}
 
 	/**
 	 * @param consumicion:
-	 *            Indica la consumiciÃ³n realizada en la Mesa.
+	 *            Indica la consumición realizada en la Mesa.
 	 * @throws EstadoInvalido 
 	 */
 	public void registrarConsumicion(Component consumicion) throws EstadoInvalido {
 
 		if (this.getEstado() == EstadoMesa.OCUPADA){
+			
 			consumiciones.add(consumicion);
 		} else {
-			throw new EstadoInvalido("La mesa debe estar ocupada para cargar una consumiciÃ³n");
+			
+			throw new EstadoInvalido("La mesa debe estar ocupada para cargar una consumición");
 		}
-		
 	}
 
 	/**
@@ -90,7 +95,7 @@ public class Mesa {
 	
 	public Double obtenerGastoDeLaMesa() {
 		
-		Double gastoDeLaMesa = 0d;
+		Double gastoDeLaMesa = 0.0d;
 		
 		Iterator<Component> itr = consumiciones.iterator();
 		while(itr.hasNext()) {
@@ -104,16 +109,8 @@ public class Mesa {
 	/**
 	 * @param estado: Indica el estado al que se desea pasar la Mesa.
 	 */
-	private void setEstado(EstadoMesa estado) throws EstadoInvalido {
+	private void setEstado(EstadoMesa estado) {
 		
-		if (estado == EstadoMesa.CERRADA){
-			this.cerrarMesa();
-		}
-		if (estado == EstadoMesa.DISPONIBLE){
-			this.desocuparMesa();
-		}
-		if (estado == EstadoMesa.OCUPADA){
-			this.ocuparMesa();
-		}
+		this.estado = estado;
 	}
 }
