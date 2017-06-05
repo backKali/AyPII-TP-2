@@ -15,13 +15,13 @@ public class Ticket {
 
 	protected static Integer contador = 0;
 
-	public Ticket(Integer numeroDeMesa, Double montoTotal, TreeSet<Component> comsumicones) {
+	public Ticket(Integer numeroDeMesa, Double montoTotal, TreeSet<Component> comsumiciones) {
 
 		setNumeroDeTicket();
 		setFechaYHora();
 		setNumeroDeMesa(numeroDeMesa);
 		setMontoTotal(montoTotal);
-		listaDeConsumiciones.addAll(comsumicones);
+		listaDeConsumiciones.addAll(comsumiciones);
 	}
 
 	/**
@@ -33,7 +33,7 @@ public class Ticket {
 
 	private void setFechaYHora() {
 
-		// Lo que pusiste aca, creo que solo devuelve el dia mes y año,
+		// Lo que pusiste aca, creo que solo devuelve el dia mes y aï¿½o,
 		// necesitamos tambien la hora
 
 		String t = "";
@@ -63,7 +63,20 @@ public class Ticket {
 		// t = fecha.toString();
 		//
 		// devuelve algo asi: Sat Sep 24 21:07:36 CEST 2005
-
+		
+		/*
+		 * Si, me di cuenta cuando corri un test y se rompio todo! Jaja!
+		 * Hoy habia estado luchando un rato a la tarde y me parece que la mejor opcion es
+		 * esa que pusiste vos (Calendar), porque ya tiene un compareTo que nos va a servir
+		 * para el metodo de "desde" y "hasta". La unica duda que tengo es como manejar la
+		 * fecha (si usar siempre el Calendar o un String y convertirlo cada vez que necesitemos)
+		 *
+		 * Nada, me parece que maÃ±ana me hago el enfermo en el laburo y le doy atomos asi para el
+		 * Martes o Miercoles ya lo tenemos terminado (y no tenemos que andar
+		 * corriendo como la otra vuelta a ultima hora ;)) 
+		 * Son estandares y no necesitamos mucho (solamente fecha y hora)
+		 */
+		
 		this.fechaYHora = t;
 
 	}

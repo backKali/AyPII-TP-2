@@ -2,6 +2,7 @@ package modulo.caja;
 
 import java.util.*;
 
+import excepciones.FechaInvalida;
 import modulo.gestion.Component;
 
 public class ModuloDeCaja {
@@ -47,8 +48,13 @@ public class ModuloDeCaja {
 		return instance;
 	}
 
-	public void listarPorFechas(String desde, String hasta) {
-
+	public void listarPorFechas(String desde, String hasta) throws FechaInvalida {
+		
+		if (validarFormatoFecha(desde) && validarFormatoFecha(hasta)){
+			
+		} else {
+			throw new FechaInvalida("El formato de fecha debe ser \"dd-mm-aaaa HH:mm:ss\"");
+		}
 	}
 
 	public Map<String, Ticket> getListadoDeTickets() {
@@ -58,4 +64,18 @@ public class ModuloDeCaja {
 	private void setListadoDeTickets(Map<String, Ticket> listadoDeTickets) {
 		this.listadoDeTickets = listadoDeTickets;
 	}
+	
+	private boolean validarFormatoFecha(String fecha){
+		boolean esFechaValida = false;
+		
+		char[] charsFecha = fecha.toCharArray();
+		
+		if ( charsFecha[2] == '-' || charsFecha[5] == '-' || charsFecha[10] == ' ' || charsFecha[13] == ':' || charsFecha[16] == ':'
+				&& charsFecha.length == 19
+				&& fecha.replaceAll("\\D+", "").length() == 14){
+			esFechaValida = !esFechaValida;
+		}
+		return esFechaValida;
+	}
+	
 }
