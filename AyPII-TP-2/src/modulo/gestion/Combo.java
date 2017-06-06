@@ -9,13 +9,14 @@ public class Combo extends Component {
 	private Set<Component> productosDelCombo;
 	private Integer descuento;
 
-	public Combo(String descripcion, Integer descuento) throws NumeroInvalido {
+	public Combo(String descripcion, Integer descuento, TreeSet<Component> productosEnElCombo) throws NumeroInvalido {
 
 		super(descripcion);
 		setDescuento(descuento);
 		this.productosDelCombo = new TreeSet<Component>();
 		setPrecioDeCompra();
 		setPrecioDeVenta();
+		productosEnElCombo.addAll(productosEnElCombo);
 	}
 
 	/**

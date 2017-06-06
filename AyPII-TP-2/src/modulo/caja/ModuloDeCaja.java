@@ -11,7 +11,6 @@ public class ModuloDeCaja {
 	public void generarTicket(Integer numeroDeMesa, Double montoTotal, LinkedList<Component> consumicionesDeLaMesa) {
 
 		TreeSet<Component> consumiciones = new TreeSet<Component>();
-
 		/*
 		 * ver si esto reemplza al while de abajo
 		 * consumiciones.addAll(consumicionesDeLaMesa);
@@ -48,6 +47,13 @@ public class ModuloDeCaja {
 	// Hay que ver si los signos del compareTo estan bien
 	// Tambien hay que ver que onda con que me marca eclipse en "Iterator" y "(Map.Entry)"
 
+	/**
+	 * Las fechas deben estar en el siguiente formato dia/mes/annio/ hora:minutos:segundos
+	 * @param desde: desde donde se quiere obtener los Tickets emitidos.
+	 * @param hasta: hasta donde se quiere obtener los Tickets emitidos.
+	 * @return: devuelve los Tickets ordenados.
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public TreeMap<String, Ticket> listarPorFechas(String desde, String hasta) {
 
 		TreeMap<String, Ticket> listadoPorFechas = new TreeMap<String, Ticket>();

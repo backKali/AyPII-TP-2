@@ -15,13 +15,18 @@ public class Ticket {
 
 	protected static Integer contador = 0;
 
-	public Ticket(Integer numeroDeMesa, Double montoTotal, TreeSet<Component> comsumicones) {
+	
+	/**
+	 * @param numeroDeMesa: Numero de la mesa a la cual se va a hacer el Ticket.
+	 * @param consumiciones: Listado de lo consumido en la mesa.
+	 */
+	public Ticket(Integer numeroDeMesa, Double montoTotal, TreeSet<Component> consumiciones) {
 
 		setNumeroDeTicket();
 		setFechaYHora();
 		setNumeroDeMesa(numeroDeMesa);
 		setMontoTotal(montoTotal);
-		listaDeConsumiciones.addAll(comsumicones);
+		listaDeConsumiciones.addAll(consumiciones);
 	}
 
 	/**
@@ -31,6 +36,9 @@ public class Ticket {
 		return fechaYHora;
 	}
 
+	/*
+	 * Setea la fecha y hora con la del sistema.
+	 */
 	private void setFechaYHora() {
 
 		// Lo que pusiste aca, creo que solo devuelve el dia mes y año,
@@ -82,26 +90,45 @@ public class Ticket {
 
 	}
 
+	/*
+	 * Devuelve el numero de la mesa a la cual pertence el Ticket.
+	 */
 	public Integer getNumeroDeMesa() {
 		return numeroDeMesa;
 	}
 
+	/*
+	 * Asigna el numero de mesa al que pertenece el Ticket.
+	 */
 	private void setNumeroDeMesa(Integer numeroDeMesa) {
 		this.numeroDeMesa = numeroDeMesa;
 	}
 
+	/*
+	 * Devuelve el gasto total de la mesa.
+	 */
 	public Double getMontoTotal() {
 		return montoTotal;
 	}
 
+	/*
+	 * Asigna el gasto total de la mesa.
+	 */
 	private void setMontoTotal(Double montoTotal) {
+		
 		this.montoTotal = montoTotal;
 	}
 
+	/*
+	 * Devuelve el numero de Ticket.
+	 */
 	public Integer getNumeroDeTicket() {
 		return numeroDeTicket;
 	}
 
+	/*
+	 * Asigna el numero que poseera el Ticket, el cual es unico.
+	 */
 	private void setNumeroDeTicket() {
 
 		this.numeroDeTicket = contador + 1;
