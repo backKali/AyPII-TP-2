@@ -14,6 +14,7 @@ import modulo.gestion.Component;
 import modulo.gestion.Mesa;
 import modulo.gestion.Producto;
 
+import java.text.ParseException;
 import java.util.*;
 
 public class TestsModuloDeCaja {
@@ -72,18 +73,18 @@ public class TestsModuloDeCaja {
 	}
 	
 	@Test
-	public void testListarTicketsDesdeHasta() throws NumeroInvalido, EstadoInvalido {
+	public void testListarTicketsDesdeHasta() throws NumeroInvalido, EstadoInvalido, ParseException {
 		
 		/*
 		 * Lo constructores para Date con los dias estan fuera de uso, asi que hay que 
 		 * hacer un adapter para convertir un String a Long. Aca parece estar la "papota":
 		 * https://stackoverflow.com/questions/12473550/how-to-convert-string-date-to-long-millseconds
+		 * 
+		 * Hecho! Se llama convertirStringALong
 		 */
-		Date desde = new Date(0L);
-		Date hasta = new Date(1495809064484L);
 		
 		//Mismo que el anterior, esta devolviendo menos de lo que deberia
-		caja.listarPorFechas(desde, hasta);
+		caja.listarPorFechas("01-01-1970 00:00:00", "31-12-2017 23:59:59");
 		
 	}
 

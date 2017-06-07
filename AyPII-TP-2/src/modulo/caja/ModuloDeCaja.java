@@ -1,5 +1,7 @@
 package modulo.caja;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import modulo.gestion.Component;
 
@@ -52,9 +54,13 @@ public class ModuloDeCaja {
 	 * @param desde: desde donde se quiere obtener los Tickets emitidos.
 	 * @param hasta: hasta donde se quiere obtener los Tickets emitidos.
 	 * @return: devuelve los Tickets ordenados.
+	 * @throws ParseException 
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public HashSet<Ticket> listarPorFechas(Date desde, Date hasta) {
+	public HashSet<Ticket> listarPorFechas(String stringDesde, String stringHasta) throws ParseException {
+		
+		Date desde = new Date(convertirStringALong(stringDesde));
+		Date hasta = new Date(convertirStringALong(stringHasta));
 
 		/*
 		 * Segun lo que piden, no necesitamos ordenarlos (obvio que es preferible), pero para empezar a testear
@@ -133,6 +139,15 @@ public class ModuloDeCaja {
 		}
 
 		return listadoTicketsDesdeHasta;
+	}
+
+	private long convertirStringALong(String fecha) throws ParseException {
+		
+		SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+	    Date fechaEnDate = formatoFecha.parse(fecha);
+	    long milisegundos= fechaEnDate.getTime();
+	    
+	    return milisegundos;
 	}
 
 	public Map<Date, Ticket> getListadoDeTickets() {
