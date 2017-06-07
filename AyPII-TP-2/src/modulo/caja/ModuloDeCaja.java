@@ -59,8 +59,18 @@ public class ModuloDeCaja {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public HashSet<Ticket> listarPorFechas(String stringDesde, String stringHasta) throws ParseException {
 		
-		Date desde = new Date(convertirStringALong(stringDesde));
-		Date hasta = new Date(convertirStringALong(stringHasta));
+		Date desde = new Date(0L);
+		Date hasta = new Date(0L);
+		boolean huboErrorEnFecha = false;
+		
+		try{
+			desde = new Date(convertirStringALong(stringDesde));
+			hasta = new Date(convertirStringALong(stringHasta));
+		} catch (ParseException mensaje){
+			System.out.println("El formato de la fecha debe ser: \"dd-MM-aaaa HH:mm:ss\"");
+			huboErrorEnFecha = !huboErrorEnFecha;
+		}
+		
 
 		/*
 		 * Segun lo que piden, no necesitamos ordenarlos (obvio que es preferible), pero para empezar a testear
@@ -107,7 +117,7 @@ public class ModuloDeCaja {
 		boolean menorADesde = false;
 		
 		//Mientras que haya siguiente y el valor del actual no sea menor a "desde"
-		while (iteradorListadoDeTickets.hasNext() && !menorADesde ){
+		while (iteradorListadoDeTickets.hasNext() && !menorADesde && !huboErrorEnFecha){
 			
 			//Voy al siguiente y ly guardo en entradaEvaluada
 			Map.Entry<Date, Ticket> entradaEvaluada = (Map.Entry) iteradorListadoDeTickets.next();
@@ -123,7 +133,9 @@ public class ModuloDeCaja {
 			 * si pasa lo contrario ("desde" esta despues de "epochEvaluado"). Lo mismo para "hasta"
 			 * y "epochEvaluado"
 			 */
-			if ((desde.compareTo(epochEvaluado) >= 0 || hasta.compareTo(epochEvaluado) <= 0)) {
+			System.out.println(desde.compareTo(epochEvaluado));
+			System.out.println(hasta.compareTo(epochEvaluado));
+			if ((desde.compareTo(epochEvaluado) <= 0 && hasta.compareTo(epochEvaluado) >= 0)) {
 
 				//Agrego los tickets que haya en esta definicion
 				listadoTicketsDesdeHasta.add(entradaEvaluada.getValue());

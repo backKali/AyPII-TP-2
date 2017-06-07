@@ -84,7 +84,7 @@ public class TestsModuloDeCaja {
 		 */
 		
 		//Mismo que el anterior, esta devolviendo menos de lo que deberia
-		caja.listarPorFechas("01-01-1970 00:00:00", "31-12-2017 23:59:59");
+		caja.listarPorFechas("01-01-1970 00:00:00", "31-12-2015");
 		
 	}
 
