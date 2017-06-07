@@ -13,7 +13,7 @@ public class Mesa {
 
 	/**
 	 * @param numeroDeMesa:
-	 *            Indica el número que poseera la Mesa.
+	 *            Indica el nï¿½mero que poseera la Mesa.
 	 */
 	public Mesa(Integer numeroDeMesa) throws EstadoInvalido {
 
@@ -23,7 +23,7 @@ public class Mesa {
 	}
 
 	/**
-	 * @return: Devuelve el número de la Mesa.
+	 * @return: Devuelve el nï¿½mero de la Mesa.
 	 */
 	public Integer getNumero() {
 
@@ -71,7 +71,7 @@ public class Mesa {
 
 	/**
 	 * @param consumicion:
-	 *            Indica la consumición realizada en la Mesa.
+	 *            Indica la consumiciï¿½n realizada en la Mesa.
 	 * @throws EstadoInvalido 
 	 */
 	public void registrarConsumicion(Component consumicion) throws EstadoInvalido {
@@ -81,7 +81,7 @@ public class Mesa {
 			consumiciones.add(consumicion);
 		} else {
 			
-			throw new EstadoInvalido("La mesa debe estar ocupada para cargar una consumición");
+			throw new EstadoInvalido("La mesa debe estar ocupada para cargar una consumiciï¿½n");
 		}
 	}
 
