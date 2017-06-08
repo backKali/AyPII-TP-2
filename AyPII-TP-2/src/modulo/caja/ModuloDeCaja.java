@@ -56,7 +56,6 @@ public class ModuloDeCaja {
 	 * @return: devuelve los Tickets ordenados.
 	 * @throws ParseException 
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public HashSet<Ticket> listarPorFechas(String stringDesde, String stringHasta) throws ParseException {
 		
 		Date desde = new Date(0L);
@@ -70,7 +69,6 @@ public class ModuloDeCaja {
 			System.out.println("El formato de la fecha debe ser: \"dd-MM-aaaa HH:mm:ss\"");
 			huboErrorEnFecha = !huboErrorEnFecha;
 		}
-		
 
 		/*
 		 * Segun lo que piden, no necesitamos ordenarlos (obvio que es preferible), pero para empezar a testear

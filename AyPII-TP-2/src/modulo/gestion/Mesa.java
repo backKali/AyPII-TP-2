@@ -66,7 +66,8 @@ public class Mesa {
 			//Genera el ticket en caso que la mesa haya hecho una consumicion
 			ModuloDeCaja.getInstance().generarTicket(this.getNumero(), this.obtenerGastoDeLaMesa(), this.consumiciones);
 		}
-		setEstado(EstadoMesa.DISPONIBLE);
+		
+		this.estado = EstadoMesa.DISPONIBLE;
 	}
 
 	/**
@@ -108,9 +109,20 @@ public class Mesa {
 	
 	/**
 	 * @param estado: Indica el estado al que se desea pasar la Mesa.
+	 * @throws EstadoInvalido 
 	 */
-	private void setEstado(EstadoMesa estado) {
+	private void setEstado(EstadoMesa estado) throws EstadoInvalido {
 		
-		this.estado = estado;
+		if (estado == EstadoMesa.CERRADA){
+			this.cerrarMesa();
+		}
+		
+		if (estado == EstadoMesa.DISPONIBLE){
+			this.desocuparMesa();
+		}
+		
+		if (estado == EstadoMesa.OCUPADA){
+			this.ocuparMesa();
+		}
 	}
 }
