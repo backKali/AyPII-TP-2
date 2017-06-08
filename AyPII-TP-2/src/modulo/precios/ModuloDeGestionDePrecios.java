@@ -12,13 +12,12 @@ public class ModuloDeGestionDePrecios {
 
 	private static ModuloDeGestionDePrecios instance;
 
-	// no estoy seguro de que seria mejor si el Hash o el Tree
-	// porque creo que no necesitamos tenerlos almacenados en orden.
 	private Set<Component> listadoDeProductos;
 
 	private ModuloDeGestionDePrecios() {
 
-		listadoDeProductos = new HashSet<Component>();
+		listadoDeProductos = new TreeSet<Component>();
+
 	}
 
 	public static ModuloDeGestionDePrecios getInstance() {
@@ -71,19 +70,21 @@ public class ModuloDeGestionDePrecios {
 		return null;
 	}
 
-	
-	
 	/**
-	 * @param descripcion: Descripcion del producto.
-	 * @param precioDeCompra: Precio al que se compro el producto.
-	 * @param precioDeVenta: Precio de al que se vendera.
-	 * @param categoria: Categoria a la que pertenece.
+	 * @param descripcion:
+	 *            Descripcion del producto.
+	 * @param precioDeCompra:
+	 *            Precio al que se compro el producto.
+	 * @param precioDeVenta:
+	 *            Precio de al que se vendera.
+	 * @param categoria:
+	 *            Categoria a la que pertenece.
 	 */
 	public void darDeAltaUnNuevoProcuto(String descripcion, Double precioDeCompra, Double precioDeVenta,
 			Categorias categoria) throws NumeroInvalido {
 
 		// Hay que ver si esto funciona bien.
-		
+
 		listadoDeProductos.add(new Producto(descripcion, precioDeCompra, precioDeVenta, categoria));
 	}
 
@@ -120,12 +121,22 @@ public class ModuloDeGestionDePrecios {
 			throws NumeroInvalido {
 
 		// Hay que ver si esto funciona bien.
-
-		listadoDeProductos.add(new Combo(descripcion, descuento, productosDelCombo));
+		Combo combo = new Combo(descripcion, descuento, productosDelCombo);
+		listadoDeProductos.add(combo);
 	}
 
 	public void imprimirCarta() {
 
+		Iterator<Component> itr = listadoDeProductos.iterator();
+		while(itr.hasNext()) {
+			
+			System.out.println(itr.next().toString());
+		}
+	}
+	
+	public void agregarCombo(Combo combo) {
+		
+		listadoDeProductos.add(combo);
 	}
 
 }

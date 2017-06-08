@@ -2,7 +2,7 @@ package modulo.gestion;
 
 import excepciones.NumeroInvalido;
 
-public class Producto extends Component {
+public class Producto extends Component implements Comparable<Component> {
 
 	private Categorias categoria;
 
@@ -20,5 +20,26 @@ public class Producto extends Component {
 
 		return this.categoria;
 	}
+
+	
+	public int compareTo(Component c) {
+		
+		final int BEFORE = -1;
+		final int EQUAL = 0;
+		final int AFTER = 1;
+
+		if (this.getCategoria().ordinal() == c.getCategoria().ordinal()) {
+
+			return EQUAL;
+		} else if (this.getCategoria().ordinal() <= c.getCategoria().ordinal()) {
+
+			return BEFORE;
+		} else {
+
+			return AFTER;
+		}
+			
+	}
+	
 
 }

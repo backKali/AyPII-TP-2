@@ -1,6 +1,5 @@
 package modulo.caja;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 import modulo.gestion.Component;
 
@@ -11,8 +10,7 @@ public class Ticket {
 	private Integer numeroDeMesa;
 	private Double montoTotal;
 
-	// mati me dijo que esto no era necesario
-	private LinkedList<Component> listaDeConsumiciones = new LinkedList<Component>();
+	private TreeSet<Component> listaDeConsumiciones = new TreeSet<Component>();
 
 	protected static Integer contador = 0;
 
@@ -21,7 +19,7 @@ public class Ticket {
 	 * @param numeroDeMesa: Numero de la mesa a la cual se va a hacer el Ticket.
 	 * @param consumiciones: Listado de lo consumido en la mesa.
 	 */
-	public Ticket(Integer numeroDeMesa, Double montoTotal, LinkedList<Component> consumiciones) {
+	public Ticket(Integer numeroDeMesa, Double montoTotal, TreeSet<Component> consumiciones) {
 
 		setNumeroDeTicket();
 		setFechaYHora();
@@ -42,13 +40,10 @@ public class Ticket {
 	 */
 	private void setFechaYHora() {
 
-		// Lo que pusiste aca, creo que solo devuelve el dia mes y a�o,
-		// necesitamos tambien la hora
-
 		Calendar calendario = new GregorianCalendar();
 
 		this.fechaYHora = calendario.getTime();
-
+		
 	}
 
 	/*

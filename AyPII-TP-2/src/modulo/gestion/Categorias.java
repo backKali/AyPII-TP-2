@@ -1,12 +1,13 @@
 package modulo.gestion;
 
 public enum Categorias {
-	
+
+	BEBIDAS_SIN_ALCOHOL, 
 	BEBIDAS_CON_ALCOHOL,
-	BEBIDAS_SIN_ALCOHOL,
+	HAMBURGUESAS, 
 	PIZZAS,
-	HAMBURGUESAS,
-	MINUTAS,
-	COMBOS,
+	MINUTAS, 
+	OTROS, 
+	COMBOS;
 
 }

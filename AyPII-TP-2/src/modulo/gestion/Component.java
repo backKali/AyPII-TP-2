@@ -2,12 +2,14 @@ package modulo.gestion;
 
 import excepciones.NumeroInvalido;
 
-public abstract class Component {
+public abstract class Component implements Comparable<Component> {
 
 	protected Integer codigoDeProducto;
 	protected String descripcion;
 	protected Double precioDeCompra;
 	protected Double precioDeVenta;
+
+	private final static Categorias categoriaDelComponent = Categorias.OTROS;
 
 	protected static Integer contador = 0;
 
@@ -20,7 +22,7 @@ public abstract class Component {
 	 *            indica el precio de compra, mayor a cero.
 	 * @param precioDeVenta:
 	 *            indica el precio de venta, mayor al precio de compra.
-	 * @throws NumeroInvalido 
+	 * @throws NumeroInvalido
 	 */
 	public Component(String descripcion, Double precioDeCompra, Double precioDeVenta) throws NumeroInvalido {
 
@@ -111,13 +113,37 @@ public abstract class Component {
 	 */
 	private void setPrecioDeVenta(Double precioDeVenta) throws NumeroInvalido {
 
-		if (precioDeVenta > 0 && precioDeVenta > this.precioDeCompra){
-			
+		if (precioDeVenta > 0 && precioDeVenta > this.precioDeCompra) {
+
 			this.precioDeVenta = precioDeVenta;
 		} else {
-			
+
 			throw new NumeroInvalido("El precio de venta debe ser mayor a cero y al precio de costo");
 		}
+	}
+
+	public Categorias getCategoria() {
+
+		return Component.categoriaDelComponent;
+	}
+
+	public int compareTo(Component c) {
+
+		final int BEFORE = -1;
+		final int EQUAL = 0;
+		final int AFTER = 1;
+
+		if (this.getCategoria().ordinal() == c.getCategoria().ordinal()) {
+
+			return EQUAL;
+		} else if (this.getCategoria().ordinal() <= c.getCategoria().ordinal()) {
+
+			return BEFORE;
+		} else {
+
+			return AFTER;
+		}
+
 	}
 
 }

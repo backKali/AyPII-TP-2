@@ -13,7 +13,7 @@ public class Mesa {
 
 	/**
 	 * @param numeroDeMesa:
-	 *            Indica el nï¿½mero que poseera la Mesa.
+	 *            Indica el número que poseera la Mesa.
 	 */
 	public Mesa(Integer numeroDeMesa) throws EstadoInvalido {
 
@@ -23,7 +23,7 @@ public class Mesa {
 	}
 
 	/**
-	 * @return: Devuelve el nï¿½mero de la Mesa.
+	 * @return: Devuelve el número de la Mesa.
 	 */
 	public Integer getNumero() {
 
@@ -66,13 +66,12 @@ public class Mesa {
 			//Genera el ticket en caso que la mesa haya hecho una consumicion
 			ModuloDeCaja.getInstance().generarTicket(this.getNumero(), this.obtenerGastoDeLaMesa(), this.consumiciones);
 		}
-		
-		this.estado = EstadoMesa.DISPONIBLE;
+		setEstado(EstadoMesa.DISPONIBLE);
 	}
 
 	/**
 	 * @param consumicion:
-	 *            Indica la consumiciï¿½n realizada en la Mesa.
+	 *            Indica la consumición realizada en la Mesa.
 	 * @throws EstadoInvalido 
 	 */
 	public void registrarConsumicion(Component consumicion) throws EstadoInvalido {
@@ -82,7 +81,7 @@ public class Mesa {
 			consumiciones.add(consumicion);
 		} else {
 			
-			throw new EstadoInvalido("La mesa debe estar ocupada para cargar una consumiciï¿½n");
+			throw new EstadoInvalido("La mesa debe estar ocupada para cargar una consumición");
 		}
 	}
 
@@ -109,20 +108,9 @@ public class Mesa {
 	
 	/**
 	 * @param estado: Indica el estado al que se desea pasar la Mesa.
-	 * @throws EstadoInvalido 
 	 */
-	private void setEstado(EstadoMesa estado) throws EstadoInvalido {
+	private void setEstado(EstadoMesa estado) {
 		
-		if (estado == EstadoMesa.CERRADA){
-			this.cerrarMesa();
-		}
-		
-		if (estado == EstadoMesa.DISPONIBLE){
-			this.desocuparMesa();
-		}
-		
-		if (estado == EstadoMesa.OCUPADA){
-			this.ocuparMesa();
-		}
+		this.estado = estado;
 	}
 }
