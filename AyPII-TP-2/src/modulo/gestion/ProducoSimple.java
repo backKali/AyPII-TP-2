@@ -15,7 +15,7 @@ public abstract class ProducoSimple implements Comparable<ProducoSimple> {
 	protected Double precioDeCompra;
 	protected Double precioDeVenta;
 
-	private final static Categorias categoriaDelComponent = Categorias.OTROS;
+	private final static Categorias categoriaDelProductoSimple = Categorias.OTROS;
 
 	protected static Integer contador = 0;
 
@@ -134,7 +134,7 @@ public abstract class ProducoSimple implements Comparable<ProducoSimple> {
 
 	public Categorias getCategoria() {
 
-		return ProducoSimple.categoriaDelComponent;
+		return ProducoSimple.categoriaDelProductoSimple;
 	}
 
 	public int compareTo(ProducoSimple producoSimpleAComparar) {
