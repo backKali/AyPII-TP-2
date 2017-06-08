@@ -2,10 +2,20 @@ package modulo.gestion;
 
 import excepciones.NumeroInvalido;
 
-public class Producto extends Component implements Comparable<Component> {
+public class Producto extends ProducoSimple implements Comparable<ProducoSimple> {
 
+	/**
+	 * @categoria: Indica la categoria a la que pertence el Producto.
+	 */
 	private Categorias categoria;
 
+	
+	/**
+	 * @param descripcion: Descripcion del Producto.
+	 * @param precioDeCompra: Precio al que se compro el Producto.
+	 * @param precioDeVenta: Precio al que se vendera el Producto.
+	 * @param categoria: Categoria a la que pertenece el Producto.
+	 */
 	public Producto(String descripcion, Double precioDeCompra, Double precioDeVenta, Categorias categoria)
 			throws NumeroInvalido {
 
@@ -22,7 +32,7 @@ public class Producto extends Component implements Comparable<Component> {
 	}
 
 	
-	public int compareTo(Component c) {
+	public int compareTo(ProducoSimple c) {
 		
 		final int BEFORE = -1;
 		final int EQUAL = 0;

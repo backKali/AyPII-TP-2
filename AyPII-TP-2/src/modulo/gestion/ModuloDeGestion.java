@@ -7,17 +7,17 @@ import excepciones.EstadoInvalido;
 public class ModuloDeGestion {
 
 	/**
-	 * 
+	 *  @mesas: Las mesas que administrara el Modulo.
+	 *  @instance: Restringe la creacion de mas de un ModuloDeGestion.
 	 */
 	private Set<Mesa> mesas;
 	public static ModuloDeGestion instance;
 
 	/**
-	 * Constructor de la clase.
+	 * Constructor privado al cual solo se puede acceder desde getInstance().
+	 * 
 	 * @param cantidadDeMesas:
 	 *            Indica la cantidad de Mesas que poseerá el Bar.
-	 * @throws EstadoInvalido 
-	 * 
 	 */
 	private ModuloDeGestion(Integer cantidadDeMesas) throws EstadoInvalido {
 
@@ -33,10 +33,10 @@ public class ModuloDeGestion {
 	}
 
 	/**
+	 * Crea una instancia del ModuloDeGestion sólo si todavía no existe alguna.
 	 * @param cantidadDeMesas:
 	 *            Indica la cantidad de Mesas que poseerá el Bar.
-	 * @return:
-	 * @throws EstadoInvalido 
+	 * @retutn: Devuelve una instancia del ModuloDeGestion.
 	 */
 	public static ModuloDeGestion getInstance(Integer cantidadDeMesas) throws EstadoInvalido {
 
@@ -88,7 +88,7 @@ public class ModuloDeGestion {
 	 *            Indica lo que se va a consumir en la Mesa.
 	 * @throws EstadoInvalido
 	 */
-	public void registrarConsumicion(Integer numeroDeMesa, Component consumicion) throws EstadoInvalido {
+	public void registrarConsumicion(Integer numeroDeMesa, ProducoSimple consumicion) throws EstadoInvalido {
 
 		registrarConsumicion(obtenerMesa(numeroDeMesa), consumicion);
 	}
@@ -109,7 +109,7 @@ public class ModuloDeGestion {
 			if (aux.getNumero() == numero) {
 
 				mesa = aux;
-				break;
+				break;  // A mi tampoco me gusta mucho el break.
 			}
 		}
 
@@ -151,7 +151,7 @@ public class ModuloDeGestion {
 	 *            Indica la consumición a registrar.
 	 * @throws EstadoInvalido 
 	 */
-	private void registrarConsumicion(Mesa mesa, Component consumucion) throws EstadoInvalido {
+	private void registrarConsumicion(Mesa mesa, ProducoSimple consumucion) throws EstadoInvalido {
 
 		mesa.registrarConsumicion(consumucion);
 	}

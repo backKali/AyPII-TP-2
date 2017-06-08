@@ -5,10 +5,15 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
 
-import modulo.gestion.Component;
+import modulo.gestion.ProducoSimple;
 
 public class ModuloDeCaja {
 
+	/**
+	 * @instance: Restringe la creacion de mas de un ModuloDeCaja.
+	 * @listadoDeTickets: Variable en la que se almacenaran los Tickets
+	 *                    emitidos.
+	 */
 	private static ModuloDeCaja instance;
 	private Map<Date, Ticket> listadoDeTickets;
 
@@ -20,9 +25,10 @@ public class ModuloDeCaja {
 	 * @param consumicionesDeLaMesa:
 	 *            Lista de las consumiciones realizadas en la mesa.
 	 */
-	public void generarTicket(Integer numeroDeMesa, Double montoTotal, LinkedList<Component> consumicionesDeLaMesa) {
+	public void generarTicket(Integer numeroDeMesa, Double montoTotal,
+			LinkedList<ProducoSimple> consumicionesDeLaMesa) {
 
-		TreeSet<Component> consumiciones = new TreeSet<Component>();
+		TreeSet<ProducoSimple> consumiciones = new TreeSet<ProducoSimple>();
 
 		consumiciones.addAll(consumicionesDeLaMesa);
 
@@ -33,11 +39,19 @@ public class ModuloDeCaja {
 
 	}
 
+	/*
+	 * Constructor privado al cual solo se puede acceder desde getInstance().
+	 */
 	private ModuloDeCaja() {
 
 		setListadoDeTickets(new TreeMap<Date, Ticket>());
 	}
 
+	/**
+	 * Crea una instancia del ModuloDeCaja sólo si todavía no existe alguna.
+	 * 
+	 * @retutn: Devuelve una instancia del ModuloDeCaja.
+	 */
 	public static ModuloDeCaja getInstance() {
 
 		if (instance == null) {

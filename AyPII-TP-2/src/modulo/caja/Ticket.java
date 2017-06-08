@@ -1,25 +1,35 @@
 package modulo.caja;
 
 import java.util.*;
-import modulo.gestion.Component;
+import modulo.gestion.ProducoSimple;
 
 public class Ticket {
 
+	/**
+	 * @numeroDeTicket: Numero unico que posee el Ticket.
+	 * @fechaYHora: Fecha y hora en la que se emitio el Ticket.
+	 * @numeroDeMesa: Indica el numero de Mesa al que pertenece el Ticket.
+	 * @montoTotal: Indica el gasto total realizado en la Mesa.
+	 */
 	private Integer numeroDeTicket;
 	private Date fechaYHora;
 	private Integer numeroDeMesa;
 	private Double montoTotal;
 
-	private TreeSet<Component> listaDeConsumiciones = new TreeSet<Component>();
-
+	/**
+	 * @listadoDeConsumiciones: Las consumiciones realizadas en la Mesa.
+	 * @contador: Usado para indicar el numero de Ticket.
+	 */
+	private TreeSet<ProducoSimple> listaDeConsumiciones = new TreeSet<ProducoSimple>();
 	protected static Integer contador = 0;
 
-	
 	/**
-	 * @param numeroDeMesa: Numero de la mesa a la cual se va a hacer el Ticket.
-	 * @param consumiciones: Listado de lo consumido en la mesa.
+	 * @param numeroDeMesa:
+	 *            Numero de la Mesa a la cual se va a hacer el Ticket.
+	 * @param consumiciones:
+	 *            Listado de lo consumido en la Mesa.
 	 */
-	public Ticket(Integer numeroDeMesa, Double montoTotal, TreeSet<Component> consumiciones) {
+	public Ticket(Integer numeroDeMesa, Double montoTotal, TreeSet<ProducoSimple> consumiciones) {
 
 		setNumeroDeTicket();
 		setFechaYHora();
@@ -36,42 +46,42 @@ public class Ticket {
 	}
 
 	/*
-	 * Setea la fecha y hora con la del sistema.
+	 * Asigna la fecha y hora en la que se emito el Ticket.
 	 */
 	private void setFechaYHora() {
 
 		Calendar calendario = new GregorianCalendar();
 
 		this.fechaYHora = calendario.getTime();
-		
+
 	}
 
 	/*
-	 * Devuelve el numero de la mesa a la cual pertence el Ticket.
+	 * Devuelve el numero de la Mesa a la cual pertence el Ticket.
 	 */
 	public Integer getNumeroDeMesa() {
 		return numeroDeMesa;
 	}
 
 	/*
-	 * Asigna el numero de mesa al que pertenece el Ticket.
+	 * Asigna el numero de Mesa al que pertenece el Ticket.
 	 */
 	private void setNumeroDeMesa(Integer numeroDeMesa) {
 		this.numeroDeMesa = numeroDeMesa;
 	}
 
 	/*
-	 * Devuelve el gasto total de la mesa.
+	 * Devuelve el gasto total de la Mesa.
 	 */
 	public Double getMontoTotal() {
 		return montoTotal;
 	}
 
 	/*
-	 * Asigna el gasto total de la mesa.
+	 * Asigna el gasto total de la Mesa.
 	 */
 	private void setMontoTotal(Double montoTotal) {
-		
+
 		this.montoTotal = montoTotal;
 	}
 

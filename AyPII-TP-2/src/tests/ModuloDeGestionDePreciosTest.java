@@ -19,7 +19,7 @@ public class ModuloDeGestionDePreciosTest {
 		a.darDeAltaUnNuevoProcuto("Vodka", 35.0, 80.0, Categorias.BEBIDAS_CON_ALCOHOL);
 		a.darDeAltaUnNuevoProcuto("Hamburguesa", 25.0, 50.0, Categorias.HAMBURGUESAS);
 
-		TreeSet<Component> s = new TreeSet<Component>();
+		TreeSet<ProducoSimple> s = new TreeSet<ProducoSimple>();
 		Producto t1 = new Producto("Cerveza 250ml", 6.0, 35.0, Categorias.BEBIDAS_SIN_ALCOHOL);
 		Producto t2 = new Producto("Pizza Chica", 22.0, 70.0, Categorias.PIZZAS);
 		
