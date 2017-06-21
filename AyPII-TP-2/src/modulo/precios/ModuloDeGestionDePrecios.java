@@ -138,8 +138,6 @@ public class ModuloDeGestionDePrecios {
 	 */
 	public void imprimirCarta() {
 
-		System.out.println(listadoDeProductos);
-		
 		Iterator<Producto> itr = listadoDeProductos.iterator();
 		while (itr.hasNext()) {
 
