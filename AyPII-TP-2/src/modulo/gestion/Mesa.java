@@ -2,7 +2,7 @@ package modulo.gestion;
 
 import java.util.*;
 
-import excepciones.EstadoInvalido;
+import excepciones.EstadoInvalidoException;
 import modulo.caja.ModuloDeCaja;
 
 public class Mesa {
@@ -14,21 +14,21 @@ public class Mesa {
 	 */
 	private Integer numero;
 	private EstadoMesa estado;
-	private LinkedList<ProducoSimple> consumiciones;
+	private LinkedList<Producto> consumiciones;
 
 	/**
 	 * @param numeroDeMesa:
-	 *            Indica el número que poseera la Mesa.
+	 *            Indica el nï¿½mero que poseera la Mesa.
 	 */
-	public Mesa(Integer numeroDeMesa) throws EstadoInvalido {
+	public Mesa(Integer numeroDeMesa) throws EstadoInvalidoException {
 
 		this.numero = numeroDeMesa;
 		setEstado(EstadoMesa.DISPONIBLE);
-		this.consumiciones = new LinkedList<ProducoSimple>();
+		this.consumiciones = new LinkedList<Producto>();
 	}
 
 	/**
-	 * @return: Devuelve el número de la Mesa.
+	 * @return: Devuelve el nï¿½mero de la Mesa.
 	 */
 	public Integer getNumero() {
 
@@ -49,14 +49,14 @@ public class Mesa {
 	/**
 	 * Cierra la Mesa.
 	 */
-	public void cerrarMesa() throws EstadoInvalido {
+	public void cerrarMesa() throws EstadoInvalidoException {
 
 		if (getEstado() == EstadoMesa.DISPONIBLE) {
 
 			setEstado(EstadoMesa.CERRADA);
 		} else {
 
-			throw new EstadoInvalido("Para Cerrar una mesa, debe estar en Disponible");
+			throw new EstadoInvalidoException("Para Cerrar una mesa, debe estar en Disponible");
 		}
 	}
 
@@ -75,17 +75,17 @@ public class Mesa {
 
 	/**
 	 * @param consumicion:
-	 *            Indica la consumición realizada en la Mesa.
-	 * @throws EstadoInvalido
+	 *            Indica la consumiciï¿½n realizada en la Mesa.
+	 * @throws EstadoInvalidoException
 	 */
-	public void registrarConsumicion(ProducoSimple consumicion) throws EstadoInvalido {
+	public void registrarConsumicion(Producto consumicion) throws EstadoInvalidoException {
 
 		if (this.getEstado() == EstadoMesa.OCUPADA) {
 
 			consumiciones.add(consumicion);
 		} else {
 
-			throw new EstadoInvalido("La mesa debe estar ocupada para cargar una consumición");
+			throw new EstadoInvalidoException("La mesa debe estar ocupada para cargar una consumiciï¿½n");
 		}
 	}
 
@@ -102,9 +102,9 @@ public class Mesa {
 	 */
 	public Double obtenerGastoDeLaMesa() {
 
-		Double gastoDeLaMesa = 0.0d;
+		Double gastoDeLaMesa = 0.0;
 
-		Iterator<ProducoSimple> itr = consumiciones.iterator();
+		Iterator<Producto> itr = consumiciones.iterator();
 		while (itr.hasNext()) {
 
 			gastoDeLaMesa += itr.next().getPrecioDeVenta();
@@ -120,5 +120,10 @@ public class Mesa {
 	private void setEstado(EstadoMesa estado) {
 
 		this.estado = estado;
+	}
+
+	public LinkedList<Producto> getConsumiciones() {
+		
+		return consumiciones;
 	}
 }

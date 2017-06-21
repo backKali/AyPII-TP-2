@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
 
-import modulo.gestion.ProducoSimple;
+import modulo.gestion.Producto;
 
 public class ModuloDeCaja {
 
@@ -26,9 +26,9 @@ public class ModuloDeCaja {
 	 *            Lista de las consumiciones realizadas en la mesa.
 	 */
 	public void generarTicket(Integer numeroDeMesa, Double montoTotal,
-			LinkedList<ProducoSimple> consumicionesDeLaMesa) {
+			LinkedList<Producto> consumicionesDeLaMesa) {
 
-		TreeSet<ProducoSimple> consumiciones = new TreeSet<ProducoSimple>();
+		TreeSet<Producto> consumiciones = new TreeSet<Producto>();
 
 		consumiciones.addAll(consumicionesDeLaMesa);
 
@@ -48,7 +48,7 @@ public class ModuloDeCaja {
 	}
 
 	/**
-	 * Crea una instancia del ModuloDeCaja sólo si todavía no existe alguna.
+	 * Crea una instancia del ModuloDeCaja sï¿½lo si todavï¿½a no existe alguna.
 	 * 
 	 * @retutn: Devuelve una instancia del ModuloDeCaja.
 	 */

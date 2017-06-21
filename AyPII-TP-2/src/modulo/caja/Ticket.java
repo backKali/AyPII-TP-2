@@ -1,7 +1,7 @@
 package modulo.caja;
 
 import java.util.*;
-import modulo.gestion.ProducoSimple;
+import modulo.gestion.Producto;
 
 public class Ticket {
 
@@ -20,7 +20,7 @@ public class Ticket {
 	 * @listadoDeConsumiciones: Las consumiciones realizadas en la Mesa.
 	 * @contador: Usado para indicar el numero de Ticket.
 	 */
-	private TreeSet<ProducoSimple> listaDeConsumiciones = new TreeSet<ProducoSimple>();
+	private TreeSet<Producto> listaDeConsumiciones = new TreeSet<Producto>();
 	protected static Integer contador = 0;
 
 	/**
@@ -29,7 +29,7 @@ public class Ticket {
 	 * @param consumiciones:
 	 *            Listado de lo consumido en la Mesa.
 	 */
-	public Ticket(Integer numeroDeMesa, Double montoTotal, TreeSet<ProducoSimple> consumiciones) {
+	public Ticket(Integer numeroDeMesa, Double montoTotal, TreeSet<Producto> consumiciones) {
 
 		setNumeroDeTicket();
 		setFechaYHora();

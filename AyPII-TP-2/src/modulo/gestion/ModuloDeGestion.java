@@ -2,7 +2,7 @@ package modulo.gestion;
 
 import java.util.*;
 
-import excepciones.EstadoInvalido;
+import excepciones.EstadoInvalidoException;
 
 public class ModuloDeGestion {
 
@@ -10,18 +10,18 @@ public class ModuloDeGestion {
 	 *  @mesas: Las mesas que administrara el Modulo.
 	 *  @instance: Restringe la creacion de mas de un ModuloDeGestion.
 	 */
-	private Set<Mesa> mesas;
+	private List<Mesa> mesas;
 	public static ModuloDeGestion instance;
 
 	/**
 	 * Constructor privado al cual solo se puede acceder desde getInstance().
 	 * 
 	 * @param cantidadDeMesas:
-	 *            Indica la cantidad de Mesas que poseerá el Bar.
+	 *            Indica la cantidad de Mesas que poseerï¿½ el Bar.
 	 */
-	private ModuloDeGestion(Integer cantidadDeMesas) throws EstadoInvalido {
+	private ModuloDeGestion(Integer cantidadDeMesas) throws EstadoInvalidoException {
 
-		this.mesas = new TreeSet<Mesa>();
+		this.mesas = new ArrayList<Mesa>();
 
 		int i = 0;
 
@@ -33,12 +33,12 @@ public class ModuloDeGestion {
 	}
 
 	/**
-	 * Crea una instancia del ModuloDeGestion sólo si todavía no existe alguna.
+	 * Crea una instancia del ModuloDeGestion sï¿½lo si todavï¿½a no existe alguna.
 	 * @param cantidadDeMesas:
-	 *            Indica la cantidad de Mesas que poseerá el Bar.
+	 *            Indica la cantidad de Mesas que poseerï¿½ el Bar.
 	 * @retutn: Devuelve una instancia del ModuloDeGestion.
 	 */
-	public static ModuloDeGestion getInstance(Integer cantidadDeMesas) throws EstadoInvalido {
+	public static ModuloDeGestion getInstance(Integer cantidadDeMesas) throws EstadoInvalidoException {
 
 		if (instance == null) {
 
@@ -51,7 +51,7 @@ public class ModuloDeGestion {
 	/**
 	 * Ocupa una Mesa.
 	 * @param numeroDeMesa:
-	 *            Número de la Mesa que se quiere ocupar.
+	 *            Nï¿½mero de la Mesa que se quiere ocupar.
 	 */
 	public void ocuparMesa(Integer numeroDeMesa) {
 
@@ -61,10 +61,10 @@ public class ModuloDeGestion {
 	/**
 	 * Cierra una Mesa.
 	 * @param numeroDeMesa:
-	 *            Número de la mesa que se quiere cerrar.
-	 * @throws EstadoInvalido 
+	 *            Nï¿½mero de la mesa que se quiere cerrar.
+	 * @throws EstadoInvalidoException 
 	 */
-	public void cerrarUnaMesa(Integer numeroDeMesa) throws EstadoInvalido {
+	public void cerrarUnaMesa(Integer numeroDeMesa) throws EstadoInvalidoException {
 
 		cerrarUnaMesa(obtenerMesa(numeroDeMesa));
 	}
@@ -72,7 +72,7 @@ public class ModuloDeGestion {
 	/**
 	 * Pasa una Mesa al estado disponible.
 	 * @param numeroDeMesa:
-	 *            Número de la mesa que se quiere pasar a diponible.
+	 *            Nï¿½mero de la mesa que se quiere pasar a diponible.
 	 */
 	public void pasarUnaMesaAEstadoDisponible(Integer numeroDeMesa) {
 
@@ -83,37 +83,26 @@ public class ModuloDeGestion {
 	 * Registra una consumicion en la Mesa.
 	 * 
 	 * @param numeroDeMesa:
-	 *            Número de la mesa en la que se va a registrar una consumición.
+	 *            Nï¿½mero de la mesa en la que se va a registrar una consumiciï¿½n.
 	 * @param consumicion:
 	 *            Indica lo que se va a consumir en la Mesa.
-	 * @throws EstadoInvalido
+	 * @throws EstadoInvalidoException
 	 */
-	public void registrarConsumicion(Integer numeroDeMesa, ProducoSimple consumicion) throws EstadoInvalido {
+	public void registrarConsumicion(Integer numeroDeMesa, Producto consumicion) throws EstadoInvalidoException {
 
 		registrarConsumicion(obtenerMesa(numeroDeMesa), consumicion);
 	}
 
 	/**
 	 * @param numero:
-	 *            Número de la Mesa a obtener.
+	 *            Nï¿½mero de la Mesa a obtener.
 	 * @return: Devuelve la Mesa que posee ese numero.
 	 */
-	private Mesa obtenerMesa(Integer numero) {
+	public Mesa obtenerMesa(Integer numero) {
 
-		Mesa mesa = null;
-
-		Iterator<Mesa> itr = mesas.iterator();
-		while (itr.hasNext()) {
-
-			Mesa aux = itr.next();
-			if (aux.getNumero() == numero) {
-
-				mesa = aux;
-				break;  // A mi tampoco me gusta mucho el break.
-			}
-		}
-
-		return mesa;
+		numero --;
+		
+		return mesas.get(numero);
 	}
 
 	/**
@@ -128,9 +117,9 @@ public class ModuloDeGestion {
 	/**
 	 * @param mesaACerrar:
 	 *            Mesa que se a cerrar.
-	 * @throws EstadoInvalido 
+	 * @throws EstadoInvalidoException 
 	 */
-	private void cerrarUnaMesa(Mesa mesaACerrar) throws EstadoInvalido {
+	private void cerrarUnaMesa(Mesa mesaACerrar) throws EstadoInvalidoException {
 
 		mesaACerrar.cerrarMesa();
 	}
@@ -146,12 +135,12 @@ public class ModuloDeGestion {
 
 	/**
 	 * @param mesa:
-	 *            Mesa en la que se va a registrar una consumición.
+	 *            Mesa en la que se va a registrar una consumiciï¿½n.
 	 * @param consumucion:
-	 *            Indica la consumición a registrar.
-	 * @throws EstadoInvalido 
+	 *            Indica la consumiciï¿½n a registrar.
+	 * @throws EstadoInvalidoException 
 	 */
-	private void registrarConsumicion(Mesa mesa, ProducoSimple consumucion) throws EstadoInvalido {
+	private void registrarConsumicion(Mesa mesa, Producto consumucion) throws EstadoInvalidoException {
 
 		mesa.registrarConsumicion(consumucion);
 	}

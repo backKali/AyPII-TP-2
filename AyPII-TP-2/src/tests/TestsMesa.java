@@ -4,12 +4,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import excepciones.EstadoInvalido;
-import excepciones.NumeroInvalido;
+import excepciones.EstadoInvalidoException;
+import excepciones.NumeroInvalidoException;
 import modulo.gestion.Categorias;
 import modulo.gestion.EstadoMesa;
 import modulo.gestion.Mesa;
-import modulo.gestion.Producto;
+import modulo.gestion.ProductoSimple;
 
 public class TestsMesa {
 	
@@ -18,16 +18,16 @@ public class TestsMesa {
 	Mesa mesaParaTestsMenosUno;
 	Mesa mesaParaTestsMenosDos;
 	
-	Producto cerveza;
+	ProductoSimple cerveza;
 	
 	@Before
-	public void constructorVariables() throws EstadoInvalido, NumeroInvalido{
+	public void constructorVariables() throws EstadoInvalidoException, NumeroInvalidoException{
 		mesaParaTestsUno = new Mesa(1);
 		mesaParaTestsDos = new Mesa(2);
 		mesaParaTestsMenosUno = new Mesa(-1);
 		mesaParaTestsMenosDos = new Mesa(-2);
 		
-		cerveza = new Producto("Cerveza", 30.0, 45.0, Categorias.BEBIDAS_CON_ALCOHOL);
+		cerveza = new ProductoSimple("Cerveza", 30.0, 45.0, Categorias.BEBIDAS_CON_ALCOHOL);
 	}
 
 	@Test
@@ -73,7 +73,7 @@ public class TestsMesa {
 	}
 	
 	@Test
-	public void pruebaMetodoDesocuparMesaSinConsumicionesPasaADisponible() throws EstadoInvalido{
+	public void pruebaMetodoDesocuparMesaSinConsumicionesPasaADisponible() throws EstadoInvalidoException{
 		//inicializacion
 		
 		//operacion
@@ -85,7 +85,7 @@ public class TestsMesa {
 	}
 	
 	@Test
-	public void pruebaRegistrarConsumicion() throws EstadoInvalido{
+	public void pruebaRegistrarConsumicion() throws EstadoInvalidoException{
 		//inicializacion
 		
 		//operacion
@@ -97,7 +97,7 @@ public class TestsMesa {
 	}
 	
 	@Test
-	public void pruebaCerrarMesaConConsumicionesGeneraTicketYPasaADisponible() throws EstadoInvalido{
+	public void pruebaCerrarMesaConConsumicionesGeneraTicketYPasaADisponible() throws EstadoInvalidoException{
 		//inicializacion
 		
 		//operacion
@@ -109,8 +109,8 @@ public class TestsMesa {
 		
 	}
 	
-	@Test (expected = EstadoInvalido.class)
-	public void pruebaRegistrarConsumicionMientrasDesocupadaOCerrada() throws EstadoInvalido{
+	@Test (expected = EstadoInvalidoException.class)
+	public void pruebaRegistrarConsumicionMientrasDesocupadaOCerrada() throws EstadoInvalidoException{
 		//inicializacion
 		
 		//operacion
@@ -118,6 +118,17 @@ public class TestsMesa {
 		
 		//evaluacion
 		
+	}
+	
+	@Test
+	public void testGetNumero(){
+		//inicializacion
+		
+		//operacion
+		mesaParaTestsUno.getNumero();
+		
+		//evaluacion
+		Assert.assertEquals(1, mesaParaTestsUno.getNumero(), 0);
 	}
 	
 }

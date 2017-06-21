@@ -2,18 +2,19 @@ package modulo.gestion;
 
 import java.util.*;
 
-import excepciones.NumeroInvalido;
+import excepciones.NumeroInvalidoException;
 
-public class Combo extends ProducoSimple implements Comparable<ProducoSimple> {
+public class Combo extends Producto implements Comparable<Producto> {
 
 	/**
 	 * @productosDelCombo: Productos que se encuentran en el Combo.
 	 * @descuento: Indica el descuento que se le aplica al Combo.
 	 * @queContieneElCombo: Los productos incluidos en el Combo.
 	 */
-	private Set<ProducoSimple> productosDelCombo;
+	private TreeSet<Producto> productosDelCombo;
+	private Double precioDeVenta;
 	private Integer descuento;
-	private String queContieneElCombo = "El Combo incluye: ";
+	private String queContieneElCombo = "El Combo incluye:";
 	private final static Categorias categoriaDelCombo = Categorias.COMBOS;
 
 	/**
@@ -24,37 +25,40 @@ public class Combo extends ProducoSimple implements Comparable<ProducoSimple> {
 	 * @param productosEnElCombo:
 	 *            Los productos de Combo.
 	 */
-	public Combo(String descripcion, Integer descuento, TreeSet<ProducoSimple> productosEnElCombo) throws NumeroInvalido {
+	public Combo(String descripcion, Integer descuento, TreeSet<Producto> productosEnElCombo) throws NumeroInvalidoException {
 
 		super(descripcion);
-		this.productosDelCombo = new TreeSet<ProducoSimple>();
+		this.productosDelCombo = new TreeSet<Producto>();
 		setDescuento(descuento);
-		setPrecioDeCompra(productosEnElCombo);
-		setPrecioDeVenta(productosEnElCombo);
 
-		Iterator<ProducoSimple> itr = productosEnElCombo.iterator();
+		Iterator<Producto> itr = productosEnElCombo.iterator();
 		while (itr.hasNext()) {
 
-			ProducoSimple productoAIncluir = itr.next();
+			Producto productoAIncluir = itr.next();
 
 			productosDelCombo.add(productoAIncluir);
 			queContieneElCombo += productoAIncluir.getDescripcion() + " ";
 		}
 
 	}
+	
+	public TreeSet<Producto> getProductosDelCombo(){
+		return this.productosDelCombo;
+	}
 
 	/**
 	 * @param descuento
-	 * @throws NumeroInvalido
+	 * @throws NumeroInvalidoException
 	 */
-	private void setDescuento(Integer descuento) throws NumeroInvalido {
+	private void setDescuento(Integer descuento) throws NumeroInvalidoException {
 
 		if (descuento >= 0 && descuento < 100) {
 
 			this.descuento = descuento;
+		
 		} else {
 
-			throw new NumeroInvalido("El descuento debe ser mayor o igual a cero y menor a cien");
+			throw new NumeroInvalidoException("El descuento debe ser mayor o igual a cero y menor a cien");
 		}
 	}
 
@@ -70,10 +74,8 @@ public class Combo extends ProducoSimple implements Comparable<ProducoSimple> {
 	 * @param producto:
 	 *            producto que se va a agregarAlCombo.
 	 */
-	public void agregarProductoAlCombo(ProducoSimple producto) {
+	public void agregarProductoAlCombo(Producto producto) {
 
-		this.precioDeCompra += producto.getPrecioDeCompra();
-		this.precioDeVenta += producto.getPrecioDeVenta();
 		this.productosDelCombo.add(producto);
 	}
 
@@ -83,43 +85,52 @@ public class Combo extends ProducoSimple implements Comparable<ProducoSimple> {
 	 */
 	public void agregarComboAlCombo(Combo combo) {
 
-		this.precioDeCompra += combo.getPrecioDeCompra();
-		this.precioDeVenta += combo.getPrecioDeVenta();
-		this.productosDelCombo.addAll(productosDelCombo);
+		this.productosDelCombo.addAll(combo.productosDelCombo);
 	}
 
 	/**
 	 * Le asigna el precio de compra al Combo.
 	 */
-	private void setPrecioDeCompra(TreeSet<ProducoSimple> productosEnElCombo) {
+	private Double getPrecioDeCompra(TreeSet<Producto> productosEnElCombo) {
 
 		Double precio = 0.0;
 
-		Iterator<ProducoSimple> itr = productosEnElCombo.iterator();
+		Iterator<Producto> itr = productosEnElCombo.iterator();
 		while (itr.hasNext()) {
 
 			precio += itr.next().precioDeCompra;
 		}
 
-		this.precioDeCompra = precio;
+		return precio;
 	}
 
 	/**
 	 * Le asigna un precio de venta al Combo con un descuento.
+	 * @throws NumeroInvalidoException 
 	 */
-	private void setPrecioDeVenta(TreeSet<ProducoSimple> productosEnElCombo) {
+	public Double getPrecioDeVenta(TreeSet<Producto> productosEnElCombo) throws NumeroInvalidoException {
 
 		Double precio = 0.0;
-
-		Iterator<ProducoSimple> itr = productosEnElCombo.iterator();
+		
+		Iterator<Producto> itr = productosEnElCombo.iterator();
 		while (itr.hasNext()) {
 
 			precio += itr.next().precioDeVenta;
 		}
 
-		precio = aplicarDescuento(precio);
+		Double precioConDescuento = aplicarDescuento(precio);
 
-		this.precioDeVenta = precio;
+		if (getPrecioDeCompra(productosEnElCombo) >= precioConDescuento){
+		
+			throw new NumeroInvalidoException("El precio de Venta debe ser mayor al precio de Compra");
+		
+		} else {
+			
+			this.precioDeVenta = precioConDescuento;
+		
+		}
+		
+		return this.precioDeVenta;
 
 	}
 
@@ -128,8 +139,9 @@ public class Combo extends ProducoSimple implements Comparable<ProducoSimple> {
 	 */
 	private Double aplicarDescuento(Double precio) {
 
-		Double p = precio - (precio * descuento / 100);
-		return p;
+		Double precioConDescuento = (precio - ( precio * (descuento.doubleValue() / 100)));
+		
+		return precioConDescuento;
 	}
 
 	public Categorias getCategoria() {
@@ -143,25 +155,46 @@ public class Combo extends ProducoSimple implements Comparable<ProducoSimple> {
 	 */
 	public String toString() {
 
-		return this.descripcion + "\n" + "$ " + this.precioDeVenta + "\n" + this.queContieneElCombo + "\n";
+		try {
+			this.getPrecioDeVenta(getProductosDelCombo());
+		} catch (NumeroInvalidoException mensaje) {
+			System.out.println("El numero ingresado es invalido");
+		}
+		
+		setQueContieneElCombo();
+		
+		return this.descripcion + "\n$ " + this.precioDeVenta + "\n" + this.queContieneElCombo + "\n";
+	}
+	
+	private void setQueContieneElCombo(){
+		
+		String productos = "";
+		
+		Iterator<Producto> iterador = productosDelCombo.iterator();
+		while (iterador.hasNext()) {
+
+			productos += " " + iterador.next().getDescripcion();
+		}
+
+		queContieneElCombo = queContieneElCombo + productos;
 	}
 
-	public int compareTo(ProducoSimple ProducoSimpleAComparar) {
+	public int compareTo(Producto ProducoSimpleAComparar) {
 
-		final int BEFORE = -1;
-		final int EQUAL = 0;
-		final int AFTER = 1;
+		int comparado;
 
 		if (this.getCategoria().ordinal() == ProducoSimpleAComparar.getCategoria().ordinal()) {
 
-			return EQUAL;
+			comparado = 0;
 		} else if (this.getCategoria().ordinal() <= ProducoSimpleAComparar.getCategoria().ordinal()) {
 
-			return BEFORE;
+			comparado = -1;
 		} else {
 
-			return AFTER;
+			comparado = 1;
 		}
+		
+		return comparado;
 	}
 
 }

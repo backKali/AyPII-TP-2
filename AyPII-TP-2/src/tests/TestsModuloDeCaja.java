@@ -3,12 +3,12 @@ package tests;
 import org.junit.Before;
 import org.junit.Test;
 
-import excepciones.EstadoInvalido;
-import excepciones.NumeroInvalido;
+import excepciones.EstadoInvalidoException;
+import excepciones.NumeroInvalidoException;
 import modulo.caja.ModuloDeCaja;
 import modulo.gestion.Categorias;
 import modulo.gestion.Mesa;
-import modulo.gestion.Producto;
+import modulo.gestion.ProductoSimple;
 
 import java.text.ParseException;
 
@@ -16,23 +16,23 @@ public class TestsModuloDeCaja {
 
 	ModuloDeCaja caja;
 
-	Producto cerveza;
-	Producto gaseosa;
-	Producto papas;
-	Producto pizza;
-	Producto hamburguesa;
+	ProductoSimple cerveza;
+	ProductoSimple gaseosa;
+	ProductoSimple papas;
+	ProductoSimple pizza;
+	ProductoSimple hamburguesa;
 
 	Mesa mesa1;
 	Mesa mesa2;
 	Mesa mesa3;
 
 	@Before
-	public void inicializadorVariables() throws NumeroInvalido, EstadoInvalido {
-		cerveza = new Producto("cerveza", 30.0, 45.0, Categorias.BEBIDAS_CON_ALCOHOL);
-		gaseosa = new Producto("gaseosa", 25.0, 40.0, Categorias.BEBIDAS_SIN_ALCOHOL);
-		papas = new Producto("papas", 20.0, 50.0, Categorias.MINUTAS);
-		pizza = new Producto("pizza", 40.0, 70.0, Categorias.PIZZAS);
-		hamburguesa = new Producto("hamburguesa", 30.0, 50.0, Categorias.HAMBURGUESAS);
+	public void inicializadorVariables() throws NumeroInvalidoException, EstadoInvalidoException {
+		cerveza = new ProductoSimple("cerveza", 30.0, 45.0, Categorias.BEBIDAS_CON_ALCOHOL);
+		gaseosa = new ProductoSimple("gaseosa", 25.0, 40.0, Categorias.BEBIDAS_SIN_ALCOHOL);
+		papas = new ProductoSimple("papas", 20.0, 50.0, Categorias.MINUTAS);
+		pizza = new ProductoSimple("pizza", 40.0, 70.0, Categorias.PIZZAS);
+		hamburguesa = new ProductoSimple("hamburguesa", 30.0, 50.0, Categorias.HAMBURGUESAS);
 
 		mesa1 = new Mesa(1);
 		mesa2 = new Mesa(2);
@@ -60,7 +60,7 @@ public class TestsModuloDeCaja {
 	}
 
 	@Test
-	public void testListarTodosLosTickets() throws NumeroInvalido, EstadoInvalido {
+	public void testListarTodosLosTickets() throws NumeroInvalidoException, EstadoInvalidoException {
 
 		// Esta devolviendo un solo Ticket, investigar por que
 		System.out.println(caja.getListadoDeTickets());
@@ -68,21 +68,10 @@ public class TestsModuloDeCaja {
 	}
 
 	@Test
-	public void testListarTicketsDesdeHasta() throws NumeroInvalido, EstadoInvalido, ParseException {
+	public void testListarTicketsDesdeHasta() throws NumeroInvalidoException, EstadoInvalidoException, ParseException {
 
-		/*
-		 * Lo constructores para Date con los dias estan fuera de uso, asi que
-		 * hay que hacer un adapter para convertir un String a Long. Aca parece
-		 * estar la "papota":
-		 * https://stackoverflow.com/questions/12473550/how-to-convert-string-
-		 * date-to-long-millseconds
-		 * 
-		 * Hecho! Se llama convertirStringALong
-		 */
-
-		// Mismo que el anterior, esta devolviendo menos de lo que deberia
 		caja.listarPorFechas("01-01-1970 00:00:00", "31-12-2015");
 
 	}
-}	
-
+	
+}

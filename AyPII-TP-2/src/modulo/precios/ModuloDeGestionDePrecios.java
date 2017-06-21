@@ -2,11 +2,11 @@ package modulo.precios;
 
 import java.util.*;
 
-import excepciones.NumeroInvalido;
+import excepciones.NumeroInvalidoException;
 import modulo.gestion.Categorias;
 import modulo.gestion.Combo;
-import modulo.gestion.ProducoSimple;
 import modulo.gestion.Producto;
+import modulo.gestion.ProductoSimple;
 
 public class ModuloDeGestionDePrecios {
 
@@ -15,19 +15,19 @@ public class ModuloDeGestionDePrecios {
 	 * @listadoDeProductos: Listado con todos los productos y combos.
 	 */
 	private static ModuloDeGestionDePrecios instance;
-	private Set<ProducoSimple> listadoDeProductos;
+	private TreeSet<Producto> listadoDeProductos;
 
 	/**
 	 * Constructor privado al cual solo se puede acceder desde getInstance().
 	 */
 	private ModuloDeGestionDePrecios() {
 
-		listadoDeProductos = new TreeSet<ProducoSimple>();
+		listadoDeProductos = new TreeSet<Producto>();
 
 	}
 
 	/**
-	 * Crea una instancia del ModuloDeCaja sólo si todavía no existe alguna.
+	 * Crea una instancia del ModuloDeCaja sï¿½lo si todavï¿½a no existe alguna.
 	 * 
 	 * @retutn: Devuelve una instancia del ModuloDeGestionDePrecios.
 	 */
@@ -48,18 +48,17 @@ public class ModuloDeGestionDePrecios {
 	 */
 	public String consultarDatosDeUnProducto(String descripcion) {
 
-		Iterator<ProducoSimple> itr = listadoDeProductos.iterator();
+		Iterator<Producto> itr = listadoDeProductos.iterator();
 		while (itr.hasNext()) {
 
-			ProducoSimple producto = itr.next();
+			Producto producto = itr.next();
 			if (descripcion.equals(producto.getDescripcion())) {
 
-				return producto.toString();
+				descripcion = producto.aString(producto);
 			}
 		}
 
-		listadoDeProductos.contains(descripcion);
-		return null;
+		return descripcion;
 	}
 
 	/**
@@ -69,16 +68,18 @@ public class ModuloDeGestionDePrecios {
 	 */
 	public String consultarDatosDeUnProducto(Integer codigo) {
 
-		Iterator<ProducoSimple> itr = listadoDeProductos.iterator();
+		String salida = "";
+		
+		Iterator<Producto> itr = listadoDeProductos.iterator();
 		while (itr.hasNext()) {
 
-			ProducoSimple producto = itr.next();
+			Producto producto = itr.next();
 			if (codigo.equals(producto.getCodigoDeProducto())) {
 
-				return producto.toString();
+				salida = producto.aString(producto);
 			}
 		}
-		return null;
+		return salida;
 	}
 
 	/**
@@ -91,12 +92,12 @@ public class ModuloDeGestionDePrecios {
 	 * @param categoria:
 	 *            Categoria a la que pertenece.
 	 */
-	public void darDeAltaUnNuevoProcuto(String descripcion, Double precioDeCompra, Double precioDeVenta,
-			Categorias categoria) throws NumeroInvalido {
+	public void darDeAltaUnNuevoProducto(String descripcion, Double precioDeCompra, Double precioDeVenta,
+			Categorias categoria) throws NumeroInvalidoException {
 
 		// Hay que ver si esto funciona bien.
 
-		listadoDeProductos.add(new Producto(descripcion, precioDeCompra, precioDeVenta, categoria));
+		listadoDeProductos.add(new ProductoSimple(descripcion, precioDeCompra, precioDeVenta, categoria));
 	}
 
 	/**
@@ -105,19 +106,15 @@ public class ModuloDeGestionDePrecios {
 	 */
 	public void darDeBajaUnProducto(Integer codigo) {
 
-		Iterator<ProducoSimple> itr = listadoDeProductos.iterator();
+		Iterator<Producto> itr = listadoDeProductos.iterator();
 		while (itr.hasNext()) {
 
-			ProducoSimple producto = itr.next();
+			Producto producto = itr.next();
 			if (codigo.equals(producto.getCodigoDeProducto())) {
 
 				listadoDeProductos.remove(producto);
 			}
 		}
-	}
-
-	public void modificarUnProducto() {
-
 	}
 
 	/**
@@ -128,8 +125,8 @@ public class ModuloDeGestionDePrecios {
 	 * @param productosDelCombo:
 	 *            Productos incluidos en el combo.
 	 */
-	public void generarUnCombo(String descripcion, Integer descuento, TreeSet<ProducoSimple> productosDelCombo)
-			throws NumeroInvalido {
+	public void generarUnCombo(String descripcion, Integer descuento, TreeSet<Producto> productosDelCombo)
+			throws NumeroInvalidoException {
 
 		// Hay que ver si esto funciona bien.
 		Combo combo = new Combo(descripcion, descuento, productosDelCombo);
@@ -141,7 +138,7 @@ public class ModuloDeGestionDePrecios {
 	 */
 	public void imprimirCarta() {
 
-		Iterator<ProducoSimple> itr = listadoDeProductos.iterator();
+		Iterator<Producto> itr = listadoDeProductos.iterator();
 		while (itr.hasNext()) {
 
 			System.out.println(itr.next().toString());
