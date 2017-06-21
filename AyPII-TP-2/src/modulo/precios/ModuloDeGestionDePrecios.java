@@ -54,7 +54,7 @@ public class ModuloDeGestionDePrecios {
 			Producto producto = itr.next();
 			if (descripcion.equals(producto.getDescripcion())) {
 
-				descripcion = producto.aString(producto);
+				descripcion = producto.toString();
 			}
 		}
 
@@ -76,7 +76,7 @@ public class ModuloDeGestionDePrecios {
 			Producto producto = itr.next();
 			if (codigo.equals(producto.getCodigoDeProducto())) {
 
-				salida = producto.aString(producto);
+				salida = producto.toString();
 			}
 		}
 		return salida;

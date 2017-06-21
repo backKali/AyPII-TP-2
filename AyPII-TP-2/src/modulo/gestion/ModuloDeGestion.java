@@ -3,6 +3,7 @@ package modulo.gestion;
 import java.util.*;
 
 import excepciones.EstadoInvalidoException;
+import excepciones.NumeroInvalidoException;
 
 public class ModuloDeGestion {
 
@@ -73,8 +74,9 @@ public class ModuloDeGestion {
 	 * Pasa una Mesa al estado disponible.
 	 * @param numeroDeMesa:
 	 *            N�mero de la mesa que se quiere pasar a diponible.
+	 * @throws NumeroInvalidoException 
 	 */
-	public void pasarUnaMesaAEstadoDisponible(Integer numeroDeMesa) {
+	public void pasarUnaMesaAEstadoDisponible(Integer numeroDeMesa) throws NumeroInvalidoException {
 
 		pasarUnaMesaAEstadoDisponible(obtenerMesa(numeroDeMesa));
 	}
@@ -127,8 +129,9 @@ public class ModuloDeGestion {
 	/**
 	 * @param mesa:
 	 *            Mesa que se va a pasar a estado disponible.
+	 * @throws NumeroInvalidoException 
 	 */
-	private void pasarUnaMesaAEstadoDisponible(Mesa mesa) {
+	private void pasarUnaMesaAEstadoDisponible(Mesa mesa) throws NumeroInvalidoException {
 
 		mesa.desocuparMesa();
 	}

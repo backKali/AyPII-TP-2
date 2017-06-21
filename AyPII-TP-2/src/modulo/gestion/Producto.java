@@ -51,18 +51,7 @@ public abstract class Producto implements Comparable<Producto> {
 	/*
 	 * Devuelve un cadena de caracteres con la descripcion y el precio de venta.
 	 */
-	public String toString(ProductoSimple producto){
-		return producto.getDescripcion() + "\n" + "$ " + producto.getPrecioDeVenta() + "\n";
-	}
-	
-	public String toString(Combo combo) throws NumeroInvalidoException{
-		return combo.getDescripcion() + "\n" + "$ " + combo.getPrecioDeVenta(combo.getProductosDelCombo()) + "\n";
-	}
-	
-	public String aString(Producto producto){
-		return producto.getDescripcion() + "\n" + "$ " + producto.getPrecioDeVenta() + "\n";
-		
-	}
+	public abstract String toString();
 	
 	/*
 	 * Devuelve el codigo que lo identifica y es unico.
@@ -122,14 +111,7 @@ public abstract class Producto implements Comparable<Producto> {
 	/*
 	 * Devuelve el precio de venta.
 	 */
-	public Double getPrecioDeVenta(Combo combo) throws NumeroInvalidoException {
-		
-		return combo.getPrecioDeVenta(combo.getProductosDelCombo());
-	}
-	
-	public Double getPrecioDeVenta(ProductoSimple producto){
-		return producto.getPrecioDeVenta();
-	}
+	public abstract Double getPrecioDeVenta() throws NumeroInvalidoException;
 
 	/*
 	 * Asigna el precio de venta del ProducoSimple.
@@ -167,12 +149,6 @@ public abstract class Producto implements Comparable<Producto> {
 		
 		return comparado;
 
-	}
-
-	public Double getPrecioDeVenta() {
-		
-		return this.precioDeVenta;
-		
 	}
 
 }

@@ -108,8 +108,10 @@ public class Combo extends Producto implements Comparable<Producto> {
 	 * Le asigna un precio de venta al Combo con un descuento.
 	 * @throws NumeroInvalidoException 
 	 */
-	public Double getPrecioDeVenta(TreeSet<Producto> productosEnElCombo) throws NumeroInvalidoException {
+	public Double getPrecioDeVenta() throws NumeroInvalidoException {
 
+		TreeSet<Producto> productosEnElCombo = this.getProductosDelCombo();
+		
 		Double precio = 0.0;
 		
 		Iterator<Producto> itr = productosEnElCombo.iterator();
@@ -156,7 +158,7 @@ public class Combo extends Producto implements Comparable<Producto> {
 	public String toString() {
 
 		try {
-			this.getPrecioDeVenta(getProductosDelCombo());
+			this.getPrecioDeVenta();
 		} catch (NumeroInvalidoException mensaje) {
 			System.out.println("El numero ingresado es invalido");
 		}

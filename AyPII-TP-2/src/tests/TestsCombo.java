@@ -53,7 +53,7 @@ public class TestsCombo {
 		Combo comboTestCreacionCorrectaConSimple = new Combo("Combo con ProductosSimples", 10, treeSetConProductosSimples);
 		
 		//operacion
-		Double precioDeVenta = comboTestCreacionCorrectaConSimple.getPrecioDeVenta(comboTestCreacionCorrectaConSimple);
+		Double precioDeVenta = comboTestCreacionCorrectaConSimple.getPrecioDeVenta();
 		
 		//comparacion
 		Assert.assertEquals(40.5, precioDeVenta, 0.0);
@@ -132,7 +132,7 @@ public class TestsCombo {
 		//operacion
 		
 		//comparacion
-		Assert.assertEquals(103.5, comboTestsConProductosSimples.getPrecioDeVenta(comboTestsConProductosSimples), 0.0);
+		Assert.assertEquals(103.5, comboTestsConProductosSimples.getPrecioDeVenta(), 0.0);
 	}
 	
 	@Test

@@ -3,6 +3,7 @@ package modulo.gestion;
 import java.util.*;
 
 import excepciones.EstadoInvalidoException;
+import excepciones.NumeroInvalidoException;
 import modulo.caja.ModuloDeCaja;
 
 public class Mesa {
@@ -62,8 +63,9 @@ public class Mesa {
 
 	/**
 	 * Desocupa la Mesa.
+	 * @throws NumeroInvalidoException 
 	 */
-	public void desocuparMesa() {
+	public void desocuparMesa() throws NumeroInvalidoException {
 
 		if (this.estado == EstadoMesa.OCUPADA && !this.consumiciones.isEmpty()) {
 
@@ -99,8 +101,9 @@ public class Mesa {
 
 	/**
 	 * Devuelve el gasto total realizado en la Mesa.
+	 * @throws NumeroInvalidoException 
 	 */
-	public Double obtenerGastoDeLaMesa() {
+	public Double obtenerGastoDeLaMesa() throws NumeroInvalidoException {
 
 		Double gastoDeLaMesa = 0.0;
 

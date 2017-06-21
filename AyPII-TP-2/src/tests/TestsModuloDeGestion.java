@@ -1,7 +1,5 @@
 package tests;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +8,6 @@ import excepciones.EstadoInvalidoException;
 import excepciones.NumeroInvalidoException;
 import modulo.gestion.Categorias;
 import modulo.gestion.EstadoMesa;
-import modulo.gestion.Mesa;
 import modulo.gestion.ModuloDeGestion;
 import modulo.gestion.ProductoSimple;
 
@@ -54,7 +51,7 @@ public class TestsModuloDeGestion {
 	}
 	
 	@Test
-	public void pruebaPasarUnaMesaAEstadoDisponible(){
+	public void pruebaPasarUnaMesaAEstadoDisponible() throws NumeroInvalidoException{
 		//inicializacion
 		
 		//operacion
@@ -66,7 +63,7 @@ public class TestsModuloDeGestion {
 	}
 	
 	@Test
-	public void pruebaRegistrarConsumicion() throws EstadoInvalidoException{
+	public void pruebaRegistrarConsumicion() throws EstadoInvalidoException, NumeroInvalidoException{
 		//inicializacion
 		moduloDeGestionParaTests.ocuparMesa(1);
 		

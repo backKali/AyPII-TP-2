@@ -53,5 +53,9 @@ public class ProductoSimple extends Producto implements Comparable<Producto> {
 	public Double getPrecioDeVenta(){
 		return this.precioDeVenta;
 	}
+
+	public String toString() {
+		return this.getDescripcion() + "\n" + "$ " + this.getPrecioDeVenta() + "\n";
+	}
 	
 }

@@ -31,7 +31,7 @@ public class TestsMesa {
 	}
 
 	@Test
-	public void pruebaGeneraUnaMesaConLinkedListVacia() {
+	public void pruebaGeneraUnaMesaConLinkedListVacia() throws NumeroInvalidoException {
 		//inicializacion
 		
 		//operacion
@@ -73,7 +73,7 @@ public class TestsMesa {
 	}
 	
 	@Test
-	public void pruebaMetodoDesocuparMesaSinConsumicionesPasaADisponible() throws EstadoInvalidoException{
+	public void pruebaMetodoDesocuparMesaSinConsumicionesPasaADisponible() throws EstadoInvalidoException, NumeroInvalidoException{
 		//inicializacion
 		
 		//operacion
@@ -85,7 +85,7 @@ public class TestsMesa {
 	}
 	
 	@Test
-	public void pruebaRegistrarConsumicion() throws EstadoInvalidoException{
+	public void pruebaRegistrarConsumicion() throws EstadoInvalidoException, NumeroInvalidoException{
 		//inicializacion
 		
 		//operacion
@@ -97,7 +97,7 @@ public class TestsMesa {
 	}
 	
 	@Test
-	public void pruebaCerrarMesaConConsumicionesGeneraTicketYPasaADisponible() throws EstadoInvalidoException{
+	public void pruebaCerrarMesaConConsumicionesGeneraTicketYPasaADisponible() throws EstadoInvalidoException, NumeroInvalidoException{
 		//inicializacion
 		
 		//operacion
