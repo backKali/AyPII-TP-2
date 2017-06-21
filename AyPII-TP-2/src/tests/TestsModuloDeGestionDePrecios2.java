@@ -10,7 +10,7 @@ import excepciones.NumeroInvalidoException;
 import modulo.gestion.*;
 import modulo.precios.*;
 
-public class TestsModuloDeGestionDePrecios {
+public class TestsModuloDeGestionDePrecios2 {
 
 	ModuloDeGestionDePrecios moduloDeGestionDePreciosParaTests;
     
@@ -28,29 +28,13 @@ public class TestsModuloDeGestionDePrecios {
 	}
 	
 	@Test
-	public void testConsultarDatosDeUnProductoPorDescripcion() throws NumeroInvalidoException {
+	public void testConsultarDatosDeUnProductoPorCodigo() throws NumeroInvalidoException {
 		//inicializacion
 		
 		//operacion
 		
 		//evaluacion
-		Assert.assertEquals("Empanada\n$ 12.0\n", moduloDeGestionDePreciosParaTests.consultarDatosDeUnProducto("Empanada"));
-	}
-
-	@Test
-	public void testGenerarUnComboEImprimirCarta() throws NumeroInvalidoException{
-		//inicializacion
-		TreeSet<Producto> treeSetConPizza = new TreeSet<Producto>();
-		ProductoSimple pizza = new ProductoSimple("Pizza", 45.0, 120.0, Categorias.PIZZAS);
-		ProductoSimple empanada = new ProductoSimple("Empanada", 7.0, 12.0, Categorias.MINUTAS);
-		treeSetConPizza.add(pizza);
-		treeSetConPizza.add(empanada);
-		
-		//operacion
-		moduloDeGestionDePreciosParaTests.generarUnCombo("Combo para Test", 10, treeSetConPizza);
-		
-		//evaluacion
-		moduloDeGestionDePreciosParaTests.imprimirCarta();
+		Assert.assertEquals("Empanada\n$ 12.0\n", moduloDeGestionDePreciosParaTests.consultarDatosDeUnProducto(1));
 	}
 	
 }

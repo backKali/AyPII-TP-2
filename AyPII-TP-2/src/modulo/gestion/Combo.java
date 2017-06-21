@@ -178,7 +178,7 @@ public class Combo extends Producto implements Comparable<Producto> {
 			productos += " " + iterador.next().getDescripcion();
 		}
 
-		queContieneElCombo = queContieneElCombo + productos;
+		queContieneElCombo += productos;
 	}
 
 	public int compareTo(Producto ProducoSimpleAComparar) {
